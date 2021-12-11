@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Home from './components/Home';
 import Landing from './components/Landing';
 import AddGame from './components/AddGame';
-import { getMovies, getVideosDB } from './redux/actions';
+import { getVideosApi, getVideosDB, getGenresAPI, getPlatformsAPI } from './redux/actions';
 import { useEffect } from 'react';
 import GameDetails from './components/GameDetails';
 import Navbar from './components/Navbar';
@@ -13,8 +13,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-  dispatch(getMovies())//{movie:'Title'}
-  //dispatch(getVideosDB())
+  dispatch(getVideosApi())//{movie:'Title'}
+  dispatch(getVideosDB())
+  dispatch(getGenresAPI())
+  dispatch(getPlatformsAPI())
   },[dispatch])
 
   return (

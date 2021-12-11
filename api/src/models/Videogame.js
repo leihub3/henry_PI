@@ -13,10 +13,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
+    // description: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: false
+    // },
     released: {
       type: DataTypes.DATEONLY
     },
@@ -24,6 +24,10 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL(10, 2)
     },
     platforms: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    background_image: {
       type: DataTypes.TEXT,
       allowNull: false
     }

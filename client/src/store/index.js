@@ -23,7 +23,9 @@ const initialState = {
 //   "rating":3.75,
 //     }  
   ],
-  videoGameDetails: []
+  videoGameDetails: [],
+  genres: [],
+  platforms: []
 }
   
 
@@ -38,6 +40,16 @@ function reducer(state = initialState, action){
         return {
           ...state,
           videoGames: state.videoGames.concat(action.payload)
+     }
+     case 'OBTENER_GENRES_API':
+        return {
+          ...state,
+          genres: action.payload
+     }
+     case 'OBTENER_PLATFORMS_API':
+        return {
+          ...state,
+          platforms: action.payload
      }
      case 'GAME_DETAILS':
         return {

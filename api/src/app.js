@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 //const cors = require('cors')
+//const {videogames} = require('./routes/videogames')
 //const addgame = require('./routes/addgame')
 
 require('./db.js');
@@ -14,10 +15,10 @@ const server = express();
 
 server.name = 'API';
 
-server.use(express.json());
+//server.use(express.json());
 
-//server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-//server.use(bodyParser.json({ limit: '50mb' }));
+server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 //server.use(cors({origin:'*'}))//{origin:'http://islaverdebronces.com.ar'}
@@ -34,6 +35,8 @@ server.use((req, res, next) => {
 
 //server.use(express.json({extended: true}));
 server.use('/', routes);
+//server.use('/videogame', videogame);
+//server.use('/videogames', videogames);
 
 
 // Error catching endware.
