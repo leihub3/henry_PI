@@ -1,6 +1,6 @@
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #333;
+    background-color: var(--main-bg-color);
     overflow: hidden;
 }
 
@@ -15,19 +15,27 @@
 }
 
 /* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
+.topnav a:hover, .topnav a.pasive:hover {
+  background-color: var(--second-bg-color);
   color: black;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #2196F3;
+  background-color: var(--second-bg-color);
   color: white;
+}
+
+.topnav a.pasive {
+  background-color: var(--third-bg-color);
+  color: black;
 }
 
 /* Right-aligned section inside the top navigation */
 .topnav-right {
+  font-family: var(--main-font-family);
+  background-color: var(--logo-bg-color);
+  padding:17px 50px 15px 50px;
   float: right;
 }
 

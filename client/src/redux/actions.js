@@ -1,90 +1,108 @@
-const { YOUR_API_KEY } = '451cd02e38814ccf96069140a6031557';
 const axios = require('axios');
 
 
-export function getVideosApi() {
-  console.log(YOUR_API_KEY)
-    //return({ type: "CARGAR_POST", payload: movie });
-    return function(dispatch) {
-      return fetch(`https://api.rawg.io/api/games?key=451cd02e38814ccf96069140a6031557&page_size=100`)//./Api.json https://jsonplaceholder.typicode.com/posts
-        .then(response => response.json())
-        .then(json => {
-          console.log(json)
-          dispatch({ type: "CARGAR_VIDEOS", payload: json.results });
-        });
-    };
-  }
-
   export function getVideosDB() {
-    //return({ type: "CARGAR_POST", payload: movie });
     return function(dispatch) {
       return fetch("http://localhost:3001/videogames")
         .then(response => response.json())
-        .then(json => {
+        .then(json => {         
           dispatch({ type: "CARGAR_VIDEOS_DB", payload: json });
         });
     };
   }
 
-  export function getGenresAPI() {
-    //Busco todos los generos de la API
+  export function addGame(game) {
+    console.log(game)
     return function(dispatch) {
-      return fetch("https://api.rawg.io/api/genres?key=451cd02e38814ccf96069140a6031557")
-        .then(response => response.json())
-        .then(json => {
-          
-          let arrayGeneros = [];
-          json.results.map(g => {
-            arrayGeneros.push({nombre: g.name})
-          })
-          //Los guardo en la DB
-              axios.post('http://localhost:3001/genres', {
-                arrayGeneros: arrayGeneros
-              })
-              .then(function (response) {
-                //console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          
-          //Los pido a la BD 
-          axios.get('http://localhost:3001/genres')
-              .then(function (response) {
-                //los despacho a la Store
-                //console.log(response.data);
-                dispatch({ type: "OBTENER_GENRES_API", payload: response.data });
-              })
-              .catch(function (error) {
-                console.log(error);
-              });    
+      const newGame = axios.post('http://localhost:3001/videogame',game)
+      .then(json => {
+        console.log(json)
+        dispatch({ type: "ADD_GAME", payload: json.data });
+      })
       
-          //
+      // let resultado = [{
+      //   nombre: newGame.nombre,
+      //   description: newGame.description,
+      //   released: newGame.released,
+      //   rating: newGame.rating,
+      //   generos: newGame.generos,
+      //   image_url: newGame.image_url,
+      //   platforms: newGame.platforms,
+      //   origen:'db'
+
+
+      // }]
+          
+    };
+  }
+
+
+  export function changeAdded(state) {
+    return function(dispatch) {      
+      console.log('Estado: ',state)
+      return dispatch({ type: "CHANGE_ADDED", payload: state });
+    };
+  }
+
+  export function cleanVideosDB() {
+    return function(dispatch) {      
+      return dispatch({ type: "LIMPIAR_VIDEOS_DB", payload: null });
+    };
+  }
+
+  export function getVideosSearch(name) {
+    return function(dispatch) {
+      return fetch("http://localhost:3001/videogames?name=" + name)
+        .then(response => response.json())
+        .then(json => {     
+          dispatch({ type: "CARGAR_VIDEOS_SEARCH", payload: json });
         });
     };
   }
 
-  export function getPlatformsAPI() {
-    //Busco todos los generos de la API
+  export function cleanVideosSearch() {
+    return function(dispatch) {      
+      return dispatch({ type: "LIMPIAR_VIDEOS_SEARCH", payload: null });
+    };
+  }
+
+
+
+ export function getGenresAPI() {
     return function(dispatch) {
-      return fetch("https://api.rawg.io/api/platforms?key=451cd02e38814ccf96069140a6031557")
+      return fetch("http://localhost:3001/genres")
         .then(response => response.json())
-        .then(json => {
-          
-          let arrayPlataformas = [];
-          json.results.map(p => {
-            arrayPlataformas.push({nombre: p.name})
-          })
-          dispatch({ type: "OBTENER_PLATFORMS_API", payload: arrayPlataformas });
-      
-          //
+        .then(json => {         
+          dispatch({ type: "OBTENER_GENRES_API", payload: json });
         });
     };
   }
 
-   export function getGameDetails(payload) {
-   return { type: "GAME_DETAILS", payload};
-       
+   export function getPlatformsAPI() {
+    return function(dispatch) {
+      return fetch("http://localhost:3001/platforms")
+        .then(response => response.json())
+        .then(json => {         
+          dispatch({ type: "OBTENER_PLATFORMS_API", payload: json });
+        });
+    };
+  }
+
+
+  export function getGameDetails(id) {
+    return function(dispatch) {
+      return fetch("http://localhost:3001/videogame/" + id)
+        .then(response => response.json())
+        .then(json => {         
+          dispatch({ type: "GAME_DETAILS", payload: json });
+        });
+    };
+  }
+
+  export function cleanGameDetails() {
+    return function(dispatch) {
+      return dispatch({ type: "LIMPIAR_GAME_DETAILS", payload: null });
+    };
   }
 
   

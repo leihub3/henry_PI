@@ -1,23 +1,42 @@
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
+import { useState } from 'react';
 import './Navbar.css'
 
 
 export default function Navbar(){
 
-    // const [result, setResult] = useState("Probando");
-    //console.log("hola result: ", result)
+   const [menu, setMenu] = useState({active:'home'});
 
-    // function handleChange(event) {
-    //     setResult(event.target.value);
-    //   }
+   function handleClickMenu(e,value){
+    //e.preventDefault();
+    setMenu({active: value})
+  }
+
+  let claseHome;
+  let claseAddGame;
+
+  switch(menu.active){
+      case 'home':
+      claseHome = 'active';
+      claseAddGame = 'pasive';
+      break;
+      case 'addGame':
+      claseHome = 'pasive';
+      claseAddGame = 'active';
+      break;
+      default:
+      claseHome = 'active';
+      claseAddGame = 'pasive';
+    }
     
     return(
-        <div class="topnav">
-            <Link className='active' to='/home'>Home</Link>
-            <Link to='/addGame'>ADD</Link>
+        <div className="topnav">
+            <Link className={claseHome} to='home' onClick={(e) =>{ handleClickMenu(e,'home')}}>HOME</Link>
+            <Link className={claseAddGame} to='addGame' onClick={(e) =>{ handleClickMenu(e,'addGame')}}>ADD GAME</Link>
   {/* <a className="active" href="/home">Home</a> */}
   {/* <a href="/addGame">ADD</a> */}
   <div className="topnav-right">
+    The All Time's Video Games Collection
 
 
     {/* <a href="#search">Search</a> */}

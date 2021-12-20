@@ -1,0 +1,70 @@
+
+#container{
+    background-image: url('../img/landing.jpg');
+    margin-top: -37px;
+    width: 100%;
+    height: 626px;
+    font-family: var(--main-font-family);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+#btnLanding{
+    position: absolute;
+    background:var(--main-bg-color);
+    top: 50%;
+    left: 7%;
+    width: 200px;
+    height: 80px;
+    padding: 20px 20px;
+    border-radius: 5px;
+    border:0px;
+    text-transform: capitalize !important;
+    font-size: 24px;
+    transition: all 0.5s;
+  }
+  
+  #btnLanding span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  #btnLanding span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  #btnLanding:hover span {
+    padding-right: 25px;
+    
+  }
+  
+  #btnLanding:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+ #btnLanding:hover{
+    background:var(--second-bg-color) !important;
+}
+
+#h1Landing{
+    width: 325px;
+    height: 466px;
+    padding: 80px 35px;
+    background: black;
+    opacity: 0.5;
+    color: white;
+    text-align: left;
+    font-size: 54px;
+    font-weight: bold;
+}

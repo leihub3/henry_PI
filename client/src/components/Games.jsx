@@ -1,24 +1,38 @@
 import { Link } from 'react-router-dom'
-import './Game.css'
+import './Games.css'
 import { useParams } from 'react-router';
 import { connect, useDispatch } from 'react-redux';
 import { getGameDetails } from '../redux/actions';
 
 export default function Games({getGameDetails, game}){
-    console.log(getGameDetails)
+    //console.log(getGameDetails)
     const dispatch = useDispatch();
-    let generos = '';
-    game.genres.forEach(g => {
-        generos += g.name + ' '
-    })
+    let db;
+    game.origen === 'api' ? db = '' : db = <span id="addedForYou">Added for you</span>;
+    let generos;
+    generos = '';        
+    game.generos.forEach(g => {
+    generos += g.nombre + ' '
+        })
+    let Background = game.background_image;
 
     return(
-            <div>
-                <h3>{game.name} </h3>
-                <p><b>Generos: </b>{generos}</p>
-                <img src={game.background_image} width='300px' />
+        
+            <div id="gameContainer" style={{backgroundImage: `url(${Background})`}}>
+            
+               
+                {/* <img src={game.background_image} width='300px' /> */}
 
-                <Link to={`/gameDetails/${game.id}`} onClick={() => dispatch(getGameDetails(game))}><br/> More details... </Link>
+                <div id='caption'>
+                <h3>{game.name} </h3>
+                <p>{db}</p>
+                </div>
+                <div id='hover'>         
+                <p><b>Genres: </b><br/>{generos}</p>
+                <Link to={`/videogames/videogame/${game.id}`} onClick={() => dispatch(getGameDetails(game.id))}><br/> More details... </Link>
+                
+                </div>
+
                 
            
         </div>
