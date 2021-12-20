@@ -11,6 +11,7 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import AddGame from './components/AddGame';
 import GameDetails from './components/GameDetails';
+import NotFound from './components/NotFound';
 
 
 ReactDOM.render(
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/" element={<Landing />} />
     </Routes>
     <Routes>      
+    <Route path='*' element={<NotFound />} />
       <Route path='/videogames' element={<App />}>      
         <Route path="home" element={<Home />} />
         <Route path="addGame" element={<AddGame /> } /> 

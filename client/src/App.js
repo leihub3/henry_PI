@@ -10,6 +10,7 @@ import GameDetails from './components/GameDetails';
 import Navbar from './components/Navbar';
 import { connect } from 'react-redux'
 import { Loading } from './components/Loading';
+import NotFound from './components/NotFound';
 
 function App(props) {
   const dispatch = useDispatch();

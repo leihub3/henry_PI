@@ -1,0 +1,17 @@
+#divImg{
+    background-image: url('../img/mario404.png');
+    position: absolute;
+    margin-top: 0px;
+    width: 489px;
+    height: 608px;
+    left: 600px;
+    top:20px
+}
+
+#notfoundContainer p{
+    position: absolute;
+    color:white;
+    font-size: xx-large;
+    top:200px;
+    left: 200px;
+}
