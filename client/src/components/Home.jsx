@@ -1,45 +1,28 @@
-import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
 import { getGameDetails, getVideosSearch, cleanVideosSearch, cleanGameDetails, cleanVideosDB } from "../redux/actions"
 import Games from "./Games"
 import { Loading } from "./Loading"
 import './Home.css'
 import { useState, useEffect } from 'react'
-//{vg.id}
+
 function Home (props){
-    //console.log("Holaaaaa : ", props.videoGames[0].results)
+    
     const [pageState, setPageState] = useState('loading');
     const [result, setResult] = useState("");
     const [generoSearch, setGeneroSearch] = useState("");
     const [alfSearch, setAlfSearch] = useState("");
     const [paginationOffset, setPaginationOffset] = useState(0);
     const [historialPag, setHistorialPag] = useState({prev:1, actual:1, historico:[1]});
-    //console.log("hola result: ", result)
+    
 
     useEffect(() => { 
         props.cleanGameDetails()
-        console.log(props.videoGameDetails)
+        //console.log(props.videoGameDetails)
         }, [])
 
     useEffect(() => {
             setPageState('loaded')
-        })    
-
-        if(pageState === 'loaded'){
-            if( document.getElementById('btnPag_'+historialPag.historico[historialPag.historico.length-1]) !== null &&
-       historialPag.historico[historialPag.historico.length-1] !== 1){
-            document.getElementById('btnPag_'+historialPag.historico[historialPag.historico.length-1]).classList.remove('actualPagination') 
-        }
-        let prev = historialPag.prev;
-        let actual = historialPag.actual;    
-
-        if(document.getElementById('btnPag_'+prev) !== null && document.getElementById('btnPag_'+actual) !== null ){
-            document.getElementById('btnPag_'+prev).classList.remove('actualPagination')
-            document.getElementById('btnPag_'+actual).classList.add('actualPagination')
-        }  
-        }
-
-   
+        })       
 
     function handleChange(event) {
         event.preventDefault();
@@ -56,17 +39,12 @@ function Home (props){
         setAlfSearch(event.target.value);
     }  
 
-    let historial = [];
 
     function handleHistorialPag(event) {
         event.preventDefault();        
         let historico = historialPag.historico;
-        setHistorialPag({prev: historialPag.actual, actual:event.target.value, historico:[...historico,event.target.value]});
-      
-        
+        setHistorialPag({prev: historialPag.actual, actual:event.target.value, historico:[...historico,event.target.value]}); 
     }  
-
-    //console.log('Historial: ', historial)
            
     function handleClickOffset(event){
         event.preventDefault(); 
@@ -75,10 +53,11 @@ function Home (props){
         event.target.value === 1 ? startPage=0 : startPage=(event.target.value-1) * resToShowPerPage;
         setPaginationOffset(startPage)
     }
-     const generosOptionsToList = [];
+    
+    const generosOptionsToList = [];
     
         props.genres.map(g => {
-            generosOptionsToList.push(<option value={g.nombre}>{g.nombre}</option>)//'<option value={g.name}>{g.name}</option>'
+            generosOptionsToList.push(<option key={g.id} value={g.nombre}>{g.nombre}</option>)//'<option value={g.name}>{g.name}</option>'
         })
 
         function handleClickSearch(){
@@ -91,7 +70,7 @@ function Home (props){
             
         }
 
-        /////////////CHEUEANDO ORDER BY
+        /////////////ORDER BY
        
         function SortArrayAlfAsc(x, y){
             if (x.name < y.name) {return -1;}
@@ -123,60 +102,69 @@ function Home (props){
             return 0;
         }
 
-        function SortArrayId(x, y){
-            if (x.id > y.id) {return -1;}
-            if (x.id < y.id) {return 1;}
-            return 0;
-        }
+        // function SortArrayId(x, y){
+        //     if (x.id > y.id) {return -1;}
+        //     if (x.id < y.id) {return 1;}
+        //     return 0;
+        // }
         var a;
         //si Search tiene juegos los muestro, sino muestro los otros
         (props.videoGamesSearch.length>0) ? a = props.videoGamesSearch : a = props.videoGames
 
         //console.log(JSON.stringify(props.videoGamesSearch.name).includes('sorry'))
       
-       
+        var s;
 
         switch(alfSearch){
             case 'alf_asc':
-            var s = a.sort(SortArrayAlfAsc); 
+            s = a.sort(SortArrayAlfAsc); 
             break;
             case 'alf_desc':
-            var s = a.sort(SortArrayAlfDesc);   
+            s = a.sort(SortArrayAlfDesc);   
             break;
             case 'rat_desc':
-            var s = a.sort(SortArrayRatDesc);   
+            s = a.sort(SortArrayRatDesc);   
             break;
             case 'rat_asc':
-            var s = a.sort(SortArrayRatAsc);   
+            s = a.sort(SortArrayRatAsc);   
             break;
             case 'seleccionar':
-            var s = a.sort(SortArrayOrigen); 
+            s = a.sort(SortArrayOrigen); 
             break;    
             default:
-            var s = a.sort(SortArrayOrigen);        
+            s = a.sort(SortArrayOrigen);        
         }
 
         //console.log(s)
 
         /******  PAGINATION */
+        if(pageState === 'loaded'){
+            if( document.getElementById('btnPag_'+historialPag.historico[historialPag.historico.length-1]) !== null &&
+       historialPag.historico[historialPag.historico.length-1] !== 1){
+            document.getElementById('btnPag_'+historialPag.historico[historialPag.historico.length-1]).classList.remove('actualPagination') 
+        }
+        let prev = historialPag.prev;
+        let actual = historialPag.actual;    
+
+        if(document.getElementById('btnPag_'+prev) !== null && document.getElementById('btnPag_'+actual) !== null ){
+            document.getElementById('btnPag_'+prev).classList.remove('actualPagination')
+            document.getElementById('btnPag_'+actual).classList.add('actualPagination')
+        }  
+        }
        
         let resToShowPerPage = 15;
         let botones = [];
         function hacerBotones(c){
             let pages = Math.ceil(c/resToShowPerPage);
             let classBtn;
-            let funcOnCLick;
             for(let i=1; i<=pages; i++){
                 if(i === 1) {
                     classBtn = 'actualPagination'
-                    //funcOnCLick = function (){};
                 }else{
-                    //document.getElementById('btnPag_'+i).classList.add('actualPagination')    
                     classBtn = ''
-                    //funcOnCLick = function (e) {handleHistorialPag(e); handleClickOffset(e);}
                 } 
                               
-                botones.push(<button className={classBtn} id={`btnPag_${i}`} value={i} onClick={(e) => {handleHistorialPag(e); handleClickOffset(e);}}>{i}</button>)
+                botones.push(<button key={`btnPag_${i}`} className={classBtn} id={`btnPag_${i}`} value={i} onClick={(e) => {handleHistorialPag(e); handleClickOffset(e);}}>{i}</button>)
             }
         }
         
@@ -265,10 +253,10 @@ function Home (props){
             {
                 s.map(vg => {
                    if(!vg.mensaje){
-                    let nameToLower = vg.name.toLowerCase();
-                    let resultToLower = result.toLowerCase();
+                    // let nameToLower = vg.name.toLowerCase();
+                    // let resultToLower = result.toLowerCase();
                     if(generoSearch !== 'seleccionar'){
-                        console.log('no deberia pero estoy aca linea 267')
+                        //console.log('no deberia pero estoy aca linea 267')
                             if(generoSearch !== 'api' && generoSearch !== 'db' /*&& nameToLower.includes(resultToLower)*/ && JSON.stringify(vg.generos).includes(generoSearch) === true){
                                 countGeneros++;
                                 if(countGeneros > paginationOffset && countGeneros <= (paginationOffset+resToShowPerPage)){
@@ -281,16 +269,16 @@ function Home (props){
                          
                                     
                                     if(generoSearch === 'api'){
-                                        if(nameToLower.includes(resultToLower) && vg.origen === 'api'){
+                                        if(/*nameToLower.includes(resultToLower) && */vg.origen === 'api'){
                                             countApi++;
                                             if(countApi > paginationOffset && countApi <= (paginationOffset+resToShowPerPage)){
-                                            return <div key={vg.id}>
+                                            return <div  key={vg.id}>
                                 <Games getGameDetails={getGameDetails} game={vg} />
                                  </div>
                                         }
                                     }
                                     }else if(generoSearch === 'db'){
-                                        if(nameToLower.includes(resultToLower) && vg.origen === 'db'){
+                                        if(/*nameToLower.includes(resultToLower) && */vg.origen === 'db'){
                                             countDb++;
                                             if(countDb > paginationOffset && countDb <= (paginationOffset+resToShowPerPage)){
                                             return <div key={vg.id}>
@@ -302,7 +290,7 @@ function Home (props){
                    
                                         
                     }else{ // si no hay seleccionado ningun genero
-                        console.log('Estoy aca sin genero select')
+                        //console.log('Estoy aca sin genero select')
                         //if(nameToLower.includes(resultToLower)){//y el criterio de busqueda coincide con algun registro
                             count++;
                             //console.log(count)
@@ -322,7 +310,7 @@ function Home (props){
             {count === 0 && countGeneros === 0 && countApi === 0 && countDb === 0 && countSearch === 0 ? <div className='div_no_results'><span>...mmm...I didn't find any result here. Please try changing searching criteria... </span></div> : ''} 
             {/* <input id='btnSearch' type="button" onClick={() => handleClickSearch()}
                 value='BY CLICKING HERE'/> */}
-            {console.log('soy count: ', count, countGeneros, countApi, countDb, countSearch)}
+            {/* {console.log('soy count: ', count, countGeneros, countApi, countDb, countSearch)} */}
             </div>
             {count !== 0 ? hacerBotones(count) : ''}
             {countGeneros !== 0 ? hacerBotones(countGeneros) : ''}

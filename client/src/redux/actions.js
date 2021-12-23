@@ -2,37 +2,17 @@ const axios = require('axios');
 
 
   export function getVideosDB() {
-    return function(dispatch) {
-      return fetch("http://localhost:3001/videogames")
-        .then(response => response.json())
-        .then(json => {         
-          dispatch({ type: "CARGAR_VIDEOS_DB", payload: json });
-        });
+    return async function(dispatch) {
+      const games = await axios.get('/videogames')
+      dispatch({ type: "CARGAR_VIDEOS_DB", payload: games.data });
     };
   }
 
   export function addGame(game) {
-    console.log(game)
-    return function(dispatch) {
-      const newGame = axios.post('http://localhost:3001/videogame',game)
-      .then(json => {
-        console.log(json)
-        dispatch({ type: "ADD_GAME", payload: json.data });
-      })
-      
-      // let resultado = [{
-      //   nombre: newGame.nombre,
-      //   description: newGame.description,
-      //   released: newGame.released,
-      //   rating: newGame.rating,
-      //   generos: newGame.generos,
-      //   image_url: newGame.image_url,
-      //   platforms: newGame.platforms,
-      //   origen:'db'
-
-
-      // }]
-          
+    //console.log(game)
+    return async function(dispatch) {
+     const newGame = await axios.post('/videogame',game)
+     dispatch({ type: "ADD_GAME", payload: newGame.data });               
     };
   }
 
@@ -51,12 +31,14 @@ const axios = require('axios');
   }
 
   export function getVideosSearch(name) {
-    return function(dispatch) {
-      return fetch("http://localhost:3001/videogames?name=" + name)
-        .then(response => response.json())
-        .then(json => {     
-          dispatch({ type: "CARGAR_VIDEOS_SEARCH", payload: json });
-        });
+    return async function(dispatch) {
+      // return fetch("http://localhost:3001/videogames?name=" + name)
+      //   .then(response => response.json())
+      //   .then(json => {     
+      //     dispatch({ type: "CARGAR_VIDEOS_SEARCH", payload: json });
+      //   });
+      const games = await axios.get("/videogames?name=" + name);
+      dispatch({ type: "CARGAR_VIDEOS_SEARCH", payload: games.data});
     };
   }
 
@@ -69,33 +51,39 @@ const axios = require('axios');
 
 
  export function getGenresAPI() {
-    return function(dispatch) {
-      return fetch("http://localhost:3001/genres")
-        .then(response => response.json())
-        .then(json => {         
-          dispatch({ type: "OBTENER_GENRES_API", payload: json });
-        });
+    return async function(dispatch) {
+      // return fetch("http://localhost:3001/genres")
+      //   .then(response => response.json())
+      //   .then(json => {         
+      //     dispatch({ type: "OBTENER_GENRES_API", payload: json });
+      //   });
+      const genres = await axios.get('/genres')
+      dispatch({ type: "OBTENER_GENRES_API", payload: genres.data });
     };
   }
 
    export function getPlatformsAPI() {
-    return function(dispatch) {
-      return fetch("http://localhost:3001/platforms")
-        .then(response => response.json())
-        .then(json => {         
-          dispatch({ type: "OBTENER_PLATFORMS_API", payload: json });
-        });
+    return async function(dispatch) {
+      // return fetch("http://localhost:3001/platforms")
+      //   .then(response => response.json())
+      //   .then(json => {         
+      //     dispatch({ type: "OBTENER_PLATFORMS_API", payload: json });
+      //   });
+      const platfomrms = await axios.get('/platforms')
+      dispatch({ type: "OBTENER_PLATFORMS_API", payload: platfomrms.data });
     };
   }
 
 
   export function getGameDetails(id) {
-    return function(dispatch) {
-      return fetch("http://localhost:3001/videogame/" + id)
-        .then(response => response.json())
-        .then(json => {         
-          dispatch({ type: "GAME_DETAILS", payload: json });
-        });
+    return async function(dispatch) {
+      // return fetch("http://localhost:3001/videogame/" + id)
+      //   .then(response => response.json())
+      //   .then(json => {         
+      //     dispatch({ type: "GAME_DETAILS", payload: json });
+      //   });
+      const gameDetails = await axios.get("/videogame/" + id)
+      dispatch({ type: "GAME_DETAILS", payload: gameDetails.data });
     };
   }
 

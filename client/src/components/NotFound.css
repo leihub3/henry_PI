@@ -8,10 +8,33 @@
     top:20px
 }
 
-#notfoundContainer p{
+#message{
     position: absolute;
     color:white;
     font-size: xx-large;
-    top:200px;
+    top:10%;
     left: 200px;
+}
+
+#message button{
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+    border: 0px;
+    color: white;
+    font-weight: bold;
+    margin: 20px 10px 20px 10px;
+    padding: 10px 40px 10px 40px;
+    cursor: pointer;
+    box-shadow: 0 9px #999;
+}
+
+#message button:hover{
+    background-color: var(--second-bg-color);
+    
+}
+
+#message button:active {
+  background-color: var(--second-bg-color);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

@@ -22,14 +22,13 @@ const { API_KEY} = process.env;
 //router.use(express.json());
 router.get('/videogames', async function(req, res){
 //console.log(Op)    
-
     try {
         if(req.query.name){
             let name = req.query.name;
             const gamesDb = await Videogame.findAll({
                 where:{                   
                     name: {
-                        [Op.like]: `%${name}%`, 
+                        [Op.iLike]: `%${name}`, 
                     }
                 },
                 attributes: ['id','name','background_image','platforms','rating','released'], 
@@ -88,13 +87,13 @@ router.get('/videogames', async function(req, res){
 
          
         if(resultado.length>0) {
-          console.log(resultado)
+          //console.log(resultado)
             return res.json(resultado)
         }
             else{
                 resultado.push(
                     {
-                        mensaje: "...I'm sorry but there isn't a game the word/s '"+req.query.name+"' in your name."
+                        mensaje: "...I'm sorry but there isn't a game with the word/s '"+req.query.name+"' in its name."
             })
                return res.json(resultado)
             }
@@ -174,7 +173,7 @@ router.get('/videogames', async function(req, res){
 
 router.get('/videogame/:idVideogame', async function(req, res){
 try{
-    console.log('Hola params: ', req.params)
+    //console.log('Hola params: ', req.params)
     const { idVideogame } = req.params;
 
     let resultado = []; 
@@ -260,7 +259,7 @@ catch(e){
 
 router.get('/genres', async function(req,res){
     try{      
-        console.log(API_KEY)
+        //console.log(API_KEY)
       const genres = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
       //console.log(genres.data.results)
       let arrayGeneros = [];
@@ -289,7 +288,7 @@ router.post('/videogame', async function(req, res){
     //console.log("soy el body: ", nombre, lanzamiento, rating, plataformas, generos, image_url)
     // res.status(200).json(req.body);
     try{
-      console.log("soy el body: ",req.body);
+      //console.log("soy el body: ",req.body);
       var { nombre, description, released, rating, platforms, generos, image_url } = req.body;
     //(typeof plataformas === 'object') ? plataformas = plataformas.join('; ') : plataformas=plataformas
 
@@ -298,11 +297,16 @@ router.post('/videogame', async function(req, res){
       generosToAdd.push(g.genero)
     })
 
-    console.log('generosAdd: ',generosToAdd)
+    //console.log('generosAdd: ',generosToAdd)
 
     let plataformasToAdd='';
-    platforms.forEach(p =>{
-      plataformasToAdd += p.platform
+    platforms.forEach((p,i) =>{
+      if(i !== platforms.length-1){
+        plataformasToAdd += p.platform + '; ';
+    }else{
+        plataformasToAdd += p.platform + '.';
+    }
+      //plataformasToAdd += p.platform + '; '
     })
         const nuevoVideo = await Videogame.create({name: nombre, description:description, released: released,rating:rating, platforms: plataformasToAdd, background_image: image_url});
         //const nuevoGenero = await Genero.create({nombre: 'Adventure'})
@@ -310,7 +314,7 @@ router.post('/videogame', async function(req, res){
 
         const nuevoVideoGeneros = await nuevoVideo.addGenero(generosToAdd)
 
-        console.log("El nuevo registro es:", nuevoVideo.dataValues);
+        //console.log("El nuevo registro es:", nuevoVideo.dataValues);
         //res.send({result:'Game Added Satisfatory'})
         //console.log({result:'Game Added Satisfatory'})
 

@@ -8,22 +8,24 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Landing from './components/Landing';
 import Home from './components/Home';
-import Navbar from './components/Navbar';
 import AddGame from './components/AddGame';
 import GameDetails from './components/GameDetails';
 import NotFound from './components/NotFound';
+import dotenv from 'dotenv'
+import axios from 'axios';
+dotenv.config();
+
+axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
 
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
     <BrowserRouter>
-    <Routes>    
-      <Route path="/" element={<Landing />} />
-    </Routes>
     <Routes>      
     <Route path='*' element={<NotFound />} />
-      <Route path='/videogames' element={<App />}>      
+    <Route path="/" element={<Landing />} />
+      <Route path='/videogames/' element={<App />}>      
         <Route path="home" element={<Home />} />
         <Route path="addGame" element={<AddGame /> } /> 
         <Route path="videogame/:id" element={<GameDetails /> } />

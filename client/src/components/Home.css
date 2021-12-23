@@ -1,4 +1,32 @@
+@media only screen and (max-width: 600px) {
+  /* For mobile phones: */
+  #homeContainer{
 
+  }
+  #games-container{
+    grid-template-columns: 100%;
+    margin-left: 10%;
+   
+}
+}
+
+@media only screen and (min-width: 600px) { 
+  /*Tablets*/
+  #games-container{
+    grid-template-columns: 100%;
+    margin-left: 10%;
+   
+}
+}
+
+
+@media only screen and (min-width: 768px) {
+  /*desktop*/
+  #games-container{
+    grid-template-columns: 20% 20% 20% 20% 20%;
+   
+}
+}
 
 #homeContainer input[type=text]{
     background-color: var(--main-bg-color);
@@ -80,7 +108,7 @@
 
 #games-container{
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    /* grid-template-columns: 20% 20% 20% 20% 20%; */
     grid-gap: 6px;
     padding: 10px;
     color: black;

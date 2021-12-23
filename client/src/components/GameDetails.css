@@ -1,3 +1,40 @@
+@media only screen and (max-width: 600px) {
+    /* For mobile phones: */
+    #detailsText{
+        left: 0%;/*705px*/
+        opacity: 0.8;
+    }
+    #textBox{
+        width: 40%;
+        padding: 0px 40px;
+    }
+  }
+
+  @media only screen and (min-width: 600px) { 
+      /*Tablets*/
+      #detailsText{
+        left: 0%;/*705px*/
+        opacity: 0.8;
+    }
+    #textBox{
+        width: 72%;
+        padding: 0px 40px;
+    }
+
+  }
+ 
+  
+@media only screen and (min-width: 768px) {
+    /* For Desktop: */
+    #detailsText{
+        left: 705px;/*705px*/
+    }
+    #textBox{
+        width: 600px;
+        padding: 0px 40px;
+    }
+  }  
+
 :root{
     font-family: var(--main-font-family);
 }
@@ -15,7 +52,6 @@
 
 #detailsText{
     position: absolute;
-    left: 705px;
     background-color: var(--fourth-bg-color);
     width: 720px;
     height: 100%;
@@ -24,10 +60,7 @@
     padding-right: 250px;
 }
 
-#textBox{
-    width: 600px;
-    padding: 0px 40px;
-}
+
 
 #txtBox.txtDetailColor{
     color: var(--main-bg-color) !important; 

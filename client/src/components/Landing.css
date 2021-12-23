@@ -1,3 +1,43 @@
+@media only screen and (max-width: 600px) { 
+  /*mobil*/
+  #h1Landing{
+  width: 100%;
+  height: 466px;  
+  padding: 80px 35px 80px 0px;
+  text-align: center;     
+  }
+
+  #btnLanding{
+    left: 25% !important;
+  }
+     
+}
+
+@media only screen and (max-width: 768px) {
+  /*tablets*/
+  #h1Landing{
+    padding: 80px 35px 80px 0px;
+    text-align: center;     
+    }
+  #btnLanding{
+    left: 32%;
+  }
+     
+
+}
+
+@media only screen and (min-width: 768px) {
+  /*desktop*/
+  #h1Landing{
+  width: 325px;
+  height: 466px;  
+  padding: 80px 35px;
+  text-align: left;     
+  }
+  #btnLanding{
+    left: 7%;
+  }
+}
 
 #container{
     background-image: url('../img/landing.jpg');
@@ -5,7 +45,6 @@
     width: 100%;
     height: 626px;
     font-family: var(--main-font-family);
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -15,8 +54,7 @@
 #btnLanding{
     position: absolute;
     background:var(--main-bg-color);
-    top: 50%;
-    left: 7%;
+    top: 50%;   
     width: 200px;
     height: 80px;
     padding: 20px 20px;
@@ -57,14 +95,10 @@
     background:var(--second-bg-color) !important;
 }
 
-#h1Landing{
-    width: 325px;
-    height: 466px;
-    padding: 80px 35px;
+#h1Landing{      
     background: black;
     opacity: 0.5;
     color: white;
-    text-align: left;
     font-size: 54px;
     font-weight: bold;
 }

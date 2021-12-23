@@ -5,12 +5,13 @@ import ('./AddGame.css')
 
 
 function AddGame(props){
+    const { changeAdded } = props;
     useEffect(() => {
-        props.changeAdded(null)
+        changeAdded(null)
     }, [])
     const [form, setForm] = useState({nombre:'', description:'', released:'', rating:5, generos:[], platforms:[], image_url:''});
 
-    console.log(form.generos)
+    //console.log(form.generos)
 
     function handleChangeNombre(event) {
         setForm({...form,nombre: event.target.value});
@@ -136,11 +137,6 @@ if(props.gameAdded === true) {
 } 
 
 
-// if(props.gameAdded === false){
-//     modal.style.display = "none";
-//     window.location.href = "http://localhost:3000/videogames/home";
-// }
-
       return(
         <div id="addGameContainer">
             <h1 className="title">ADD GAME</h1>
@@ -160,13 +156,13 @@ if(props.gameAdded === true) {
                 {/* {generosDB} */}
                 <div id="addGameGeneros">
                 {props.genres.map(g => (
-                   <div className="addGameCadaGenero"><label >{g.nombre}</label><input  key={g.id} type="checkbox" name="generos" value={g.id} onChange={(e) => {handleChangeGeneros(e); genresReset()}} /></div>
+                   <div key={g.id} className="addGameCadaGenero"><label >{g.nombre}</label><input type="checkbox" name="generos" value={g.id} onChange={(e) => {handleChangeGeneros(e); genresReset()}} /></div>
                 ))}
                 </div>
                 <br/><label className="subtitle" title="Required">Platforms*:</label><span id='requiredPlatforms' style={{display:'none', color:'red'}}> Campo requerido</span><br/>
                 <div id="addGamePlataformas">
                 {props.platforms.map(g => (
-                   <div className="addGameCadaPlatform"><label >{g.nombre}</label><input  key={g.nombre} type="checkbox" id="formPlatforms" name="plataformas" value={g.nombre} onChange={(e) => {handleChangePlatforms(e); platformsReset()}} /></div>
+                   <div key={g.nombre} className="addGameCadaPlatform"><label >{g.nombre}</label><input   type="checkbox" id="formPlatforms" name="plataformas" value={g.nombre} onChange={(e) => {handleChangePlatforms(e); platformsReset()}} /></div>
                 ))}
                 </div>
 

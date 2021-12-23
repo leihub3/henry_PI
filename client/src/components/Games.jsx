@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Games.css'
-import { useParams } from 'react-router';
-import { connect, useDispatch } from 'react-redux';
-import { getGameDetails } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+
 
 export default function Games({getGameDetails, game}){
     //console.log(getGameDetails)
@@ -38,13 +37,3 @@ export default function Games({getGameDetails, game}){
         </div>
     )
 }
-
-// const mapStateToProps = state => ({
-//     videoGames: state.videoGames
-// })
-
-// const mapDispatchToProps = dispatch => ({
-//     getGameDetails: (game) => dispatch(getGameDetails(game))
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Games);

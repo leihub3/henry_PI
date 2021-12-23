@@ -8,7 +8,6 @@ import { Loading } from './Loading';
 
 function GameDetails(props){
     let game = props.videoGameDetails[0];    
-    const params = useParams();
 
     const [estado, setEstado] = useState('loading');
 

@@ -1,3 +1,46 @@
+@media only screen and (max-width: 600px) {
+  /* For mobile phones: */
+  #addGameGeneros{
+    grid-template-columns: 50% 50%;
+    padding: 10px 70px 10px 25px;
+  }
+
+  #addGamePlataformas{
+    grid-template-columns: 50% 50%;
+    padding: 10px 70px 10px 25px;
+  }
+  
+}
+
+@media only screen and (min-width: 600px) { 
+    /*Tablets*/
+    #addGameGeneros{
+      grid-template-columns: 33% 33% 33%;
+      padding: 10px 120px 10px 0px;
+    }
+
+    #addGamePlataformas{
+      grid-template-columns: 33% 33% 33%;
+      padding: 10px 120px 10px 0px;
+    }
+  
+
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* For Desktop: */
+  #addGameGeneros{
+    grid-template-columns: 25% 25% 25% 25%;
+    padding: 10px 300px 10px 150px;
+  }
+
+  #addGamePlataformas{
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    padding: 10px 300px 10px 150px;
+  }
+}  
+
 label{
     font-weight: bold;
 }
@@ -112,10 +155,9 @@ textarea{
 
   #addGameGeneros{
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
     grid-gap: 10px;
     /* background-color: #2196F3; */
-    padding: 10px 300px 10px 150px;
+    
   }
 
   .addGameCadaGenero{
@@ -123,11 +165,9 @@ textarea{
   }
 
   #addGamePlataformas{
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    display: grid;    
     grid-gap: 10px;
     /* background-color: #2196F3; */
-    padding: 10px 300px 10px 150px;
   }
 
   .addGameCadaPlatform{
@@ -164,7 +204,8 @@ textarea{
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 45%;
+    border-radius: 10px;
     transition: all 0.99s ease;
   }
 
