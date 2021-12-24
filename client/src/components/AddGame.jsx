@@ -132,7 +132,8 @@ if(props.gameAdded === true) {
     span.onclick = function() {
         modal.style.display = "none";
         props.changeAdded(false)
-        window.location.href = "http://localhost:3000/videogames/home";
+        const host =  window.location.hostname;
+        window.location.href = host + "/videogames/home";
       }
 } 
 

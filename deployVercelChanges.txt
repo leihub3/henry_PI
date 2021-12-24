@@ -1,0 +1,2 @@
+https://dev.to/kapi1/solved-treating-warnings-as-errors-because-of-process-env-ci-true-bk5
+CI=false npm run build
