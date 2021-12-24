@@ -41,7 +41,7 @@ router.get('/videogames', async function(req, res){
 
             let limitApi = 15 - gamesDb.length;
 
-            const games = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}&page_size=${limitApi}`)
+            const games = await axios.get(`https://api.rawg.io/api/games?key=451cd02e38814ccf96069140a6031557&search=${name}&page_size=${limitApi}`)
             let allGames = [...games.data.results]
         //console.log(games.data.results)
         const resultado = [];
@@ -99,9 +99,9 @@ router.get('/videogames', async function(req, res){
             }
         }else{
 
-        const games = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1&page_size=40`)
-        const games2 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=5&page_size=40`)
-        const games3 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=7&page_size=20`)
+        const games = await axios.get(`https://api.rawg.io/api/games?key=451cd02e38814ccf96069140a6031557&page=1&page_size=40`)
+        const games2 = await axios.get(`https://api.rawg.io/api/games?key=451cd02e38814ccf96069140a6031557&page=5&page_size=40`)
+        const games3 = await axios.get(`https://api.rawg.io/api/games?key=451cd02e38814ccf96069140a6031557&page=7&page_size=20`)
         let allGames = [...games.data.results, ...games2.data.results, ...games3.data.results]
         //console.log(games.data.results)
         const resultado = [];
@@ -179,7 +179,7 @@ try{
     let resultado = []; 
 
     if(!idVideogame.toString().includes('-')){
-        const gameApi = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`)
+        const gameApi = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=451cd02e38814ccf96069140a6031557`)
     //(gameApi.hasOwnProperty('detail')) ? gameApi = '' : gameApi  = 
    
  
@@ -260,7 +260,7 @@ catch(e){
 router.get('/genres', async function(req,res){
     try{      
         //console.log(API_KEY)
-      const genres = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
+      const genres = await axios.get(`https://api.rawg.io/api/genres?key=451cd02e38814ccf96069140a6031557`)
       //console.log(genres.data.results)
       let arrayGeneros = [];
       genres.data.results.map(g => {
@@ -332,7 +332,7 @@ router.post('/videogame', async function(req, res){
 
 router.get('/platforms', async function(req, res){
    try{
-    const platforms = await axios.get(`https://api.rawg.io/api/platforms?key=${API_KEY}`)
+    const platforms = await axios.get(`https://api.rawg.io/api/platforms?key=451cd02e38814ccf96069140a6031557`)
     //console.log(platforms)
     let arrayPlataformas = [];
 
