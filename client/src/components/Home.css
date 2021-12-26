@@ -1,7 +1,7 @@
 @media only screen and (max-width: 600px) {
   /* For mobile phones: */
-  #homeContainer{
-
+  #searchBar input[type=button]{ 
+    margin-bottom: -23px;
   }
   #games-container{
     grid-template-columns: 100%;
@@ -12,10 +12,12 @@
 
 @media only screen and (max-width: 768px) { 
   /*Tablets*/
+  #searchBar input[type=button]{ 
+    margin-bottom: -23px;
+  }
   #games-container{
     grid-template-columns: 100%;
-    margin-left: 10%;
-   
+    margin-left: 10%;   
 }
 }
 
@@ -23,9 +25,12 @@
 @media only screen and (min-width: 768px) {
   /*desktop*/
   #games-container{
-    grid-template-columns: 20% 20% 20% 20% 20%;
-   
+    grid-template-columns: 20% 20% 20% 20% 20%;   
 }
+#searchBar input[type=button]{ 
+  margin-bottom: -21px;
+}
+
 }
 
 #homeContainer input[type=text]{
@@ -62,7 +67,6 @@
     padding: 10px 20px 0px 10px;
     margin-left: -25px;
     margin-right: 20px;
-    margin-bottom: -23px;
     border: none;
     cursor: pointer;
   }
