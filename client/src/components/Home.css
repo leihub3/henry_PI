@@ -1,4 +1,19 @@
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 412px) { 
+  #searchBar input[type=button]{ 
+    margin-bottom: -21px;
+  }
+  #homeContainer input[type=text]{
+    width: 57% !important;
+  }
+  #games-container{
+    grid-template-columns: 100%;
+    margin-left: 12%;
+   
+}
+  
+}
+
+@media only screen and (min-width: 412px) and (max-width:600px) {
   /* For mobile phones: */
   #searchBar input[type=button]{ 
     margin-bottom: -21px;
@@ -17,7 +32,7 @@
   }
   #games-container{
     grid-template-columns: 100%;
-    margin-left: 10%;   
+    margin-left: 4%;   
 }
 }
 
