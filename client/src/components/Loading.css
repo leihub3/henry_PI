@@ -7,10 +7,10 @@
   
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 600px) and (max-width: 768px) { 
   /* Tablets: */
   .loader {
-    left:37%;
+    left:40%;
     top:40%;
   }  
 }
@@ -18,7 +18,7 @@
 @media only screen and (min-width: 768px) {
   /* Desktop: */
   .loader {
-    left:45%;
+    left:40%;
     top:40%;
   }
   

@@ -1,7 +1,7 @@
 @media only screen and (max-width: 600px) {
   /* For mobile phones: */
   #searchBar input[type=button]{ 
-    margin-bottom: -23px;
+    margin-bottom: -21px;
   }
   #games-container{
     grid-template-columns: 100%;
@@ -10,10 +10,10 @@
 }
 }
 
-@media only screen and (max-width: 768px) { 
+@media only screen and (min-width: 600px) and (max-width: 768px) { 
   /*Tablets*/
   #searchBar input[type=button]{ 
-    margin-bottom: -23px;
+    margin-bottom: -21px;
   }
   #games-container{
     grid-template-columns: 100%;
@@ -22,7 +22,18 @@
 }
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width:768px) and (max-width: 1024px)  {
+  /*Tablet*/
+  #games-container{
+    grid-template-columns: 33% 33% 33%;   
+}
+#searchBar input[type=button]{ 
+  margin-bottom: -21px;
+}
+
+}
+
+@media only screen and (min-width:1024px){
   /*desktop*/
   #games-container{
     grid-template-columns: 20% 20% 20% 20% 20%;   
@@ -32,6 +43,7 @@
 }
 
 }
+
 
 #homeContainer input[type=text]{
     background-color: var(--main-bg-color);
