@@ -1,18 +1,4 @@
-@media only screen and (max-width: 412px) {
-  /* For mobile phones: */
-  .topnav-right {
-    /* width: 45vh; */
-    text-align: center;
-  }
-}
-
-@media only screen and (min-width: 413px) and (max-width: 600px) { 
-  .topnav-right {
-    width: 45vh;
-    text-align: center;
-  }
-}
-
+/* Add a black background color to the top navigation */
 .topnav {
     background-color: var(--main-bg-color);
     overflow: hidden;

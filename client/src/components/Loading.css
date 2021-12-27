@@ -1,23 +1,16 @@
-@media only screen and (max-width: 412px) { 
-  .loader {
-    left:30%;
-    top:40%;
-  }
-}
-
-@media only screen and (min-width: 412px) and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   /* For mobile phones: */
   .loader {
-    left:34%;
+    left:30%;
     top:40%;
   }
   
 }
 
-@media only screen and (min-width: 600px) and (max-width: 768px) { 
+@media only screen and (max-width: 768px) {
   /* Tablets: */
   .loader {
-    left:42%;
+    left:37%;
     top:40%;
   }  
 }
@@ -25,7 +18,7 @@
 @media only screen and (min-width: 768px) {
   /* Desktop: */
   .loader {
-    left:40%;
+    left:45%;
     top:40%;
   }
   
