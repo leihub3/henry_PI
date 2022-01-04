@@ -1,16 +1,36 @@
 @media only screen and (max-width: 600px) {
     /* For mobile phones: */
-    #detailsText{display:none;
-        left: 0%;/*705px*/
-        opacity: 0.8;
+    #detailsContainer{
+        background-position-x: -110px !important;
+        background-position-y: 100px !important;
+        background-repeat: no-repeat !important;
+        background-size: 600px !important;
+        height: 200vh !important;
     }
-   #detailsContainer{
-       background-size:contain !important;
-       background-position-x: -0px !important;
-       background-position-y: 100px !important;
-   }
+
+    #detailsText{
+        /* background:transparent !important; */
+        position: absolute;
+        left: 0%;/*705px*/
+        top: 45% !important;
+        opacity: 0.8;
+        width: 95% !important;
+        border:none !important;
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        padding-left: 8px;
+    }
    #titleBig{
-       width: 100vw !important;
+       position:relative;
+       top: 400px !important;
+       width: 95vw !important;
+       z-index: 99999;
+       opacity: 1 !important;
+       padding: 0px 0px 0px 0px!important;
+   }
+   .txtDescription{
+       overflow:auto !important;
+       height: 1500px !important;
    }
   }
 

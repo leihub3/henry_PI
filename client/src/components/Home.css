@@ -1,11 +1,14 @@
 @media only screen and (max-width: 600px) {
   /* For mobile phones: */
-  
+  #searchBar{
+    padding-top: 40px;
+  } 
+ 
   #searchBar input[type=text]{
     width: 65vw;
   }
   #searchBar input[type=button]{ 
-    margin-bottom: -21px !important;
+    margin-bottom: -23px !important;
   }
   select{
     width: 84vw !important;

@@ -1,8 +1,18 @@
 @media only screen and (max-width: 600px) {
- .topnav-left{
+ .topnav-left :nth-child(2) {
   display: none;
  }
  
+ .topnav-left :nth-child(1) {
+  position:absolute;
+  top:60px !important;
+  padding-left: 0px !important;
+  font-weight: bold;
+  z-index: 999999999999;
+  width: 100% !important;
+  left: 0px;
+ }
+
  .btnAddGame{
    display: none !important;
  }
@@ -14,7 +24,7 @@
    padding:20px 20px !important;
    font-size: larger;
    text-align: center;
-   z-index: 99999999;
+   z-index: 999999999999;
  }
  .titleMenuMobile{
    width: 90%;
