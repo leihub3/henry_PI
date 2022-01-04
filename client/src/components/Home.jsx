@@ -217,7 +217,8 @@ function Home (props){
     
         return(
             <div id='homeContainer'>
-                <h1 className="pageTitle">HOME</h1>              
+                <h1 className="pageTitle">HOME</h1>  
+                {console.log(window.innerWidth)}
                     <div id="searchBar">
                         <input
                             type="text"
@@ -283,8 +284,7 @@ function Home (props){
                         
                     </select>
 
-                    <span className='btnAddGame' onClick={() => handleShowAddGame()}> + ADD GAME </span>
-
+                    <div className='btnAddGame' onClick={() => handleShowAddGame()}> + ADD GAME </div>
                 <div id='games-container'>
         
                 {

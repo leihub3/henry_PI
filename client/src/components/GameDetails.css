@@ -1,13 +1,17 @@
 @media only screen and (max-width: 600px) {
     /* For mobile phones: */
-    #detailsText{
+    #detailsText{display:none;
         left: 0%;/*705px*/
         opacity: 0.8;
     }
-    #textBox{
-        width: 40%;
-        padding: 0px 40px;
-    }
+   #detailsContainer{
+       background-size:contain !important;
+       background-position-x: -0px !important;
+       background-position-y: 100px !important;
+   }
+   #titleBig{
+       width: 100vw !important;
+   }
   }
 
   @media only screen and (min-width:601px) and (max-width: 768px) { 

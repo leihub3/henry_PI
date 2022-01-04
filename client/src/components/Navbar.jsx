@@ -5,10 +5,15 @@ import './Navbar.css'
 
 export default function Navbar(){
   const [menu, setMenu] = useState({active:'home'});
+  const [showMobile, setShowMobile] = useState(false);
 
   function handleClickMenu(e,value){
     //e.preventDefault();
     setMenu({active: value})
+  }
+
+  function showMobileMenu(){
+    setShowMobile(true)    
   }
 
   let claseHome;
@@ -30,11 +35,17 @@ export default function Navbar(){
     
   return(
       <div className="topnav">
-          <Link className={claseHome} to='home' onClick={(e) =>{ handleClickMenu(e,'home')}}>HOME</Link>
+        <div className='topnav-left'>
+        <Link className={claseHome} to='home' onClick={(e) =>{ handleClickMenu(e,'home')}}>HOME</Link>
           <Link className={claseAddGame} to='addGame' onClick={(e) =>{ handleClickMenu(e,'addGame')}}>ADD GAME</Link>
+        </div>
+          
           <div className="topnav-right">
-          The All Time Video Games Collection
+            <div className='titleMenuMobile'>
+              The All Time Video Games Collection
+            </div>
           </div>  
+         
       </div>
   )
 }

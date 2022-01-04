@@ -1,4 +1,28 @@
-/* Add a black background color to the top navigation */
+@media only screen and (max-width: 600px) {
+ .topnav-left{
+  display: none;
+ }
+ 
+ .btnAddGame{
+   display: none !important;
+ }
+ 
+ .topnav-right{
+   width: 100%;
+   display: flex;
+   position: fixed;
+   padding:20px 20px !important;
+   font-size: larger;
+   text-align: center;
+   z-index: 99999999;
+ }
+ .titleMenuMobile{
+   width: 90%;
+ }
+}
+
+
+
 .topnav {
     background-color: var(--main-bg-color);
     overflow: hidden;

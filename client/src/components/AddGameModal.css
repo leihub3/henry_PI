@@ -1,7 +1,6 @@
 @media only screen and (max-width: 600px) {
   /* For mobile phones: */
   
-
   #addGamePlataformas{
     grid-template-columns: 50% 50%;
     padding: 10px 70px 10px 25px;
