@@ -19,7 +19,6 @@ const axios = require('axios');
 
   export function changeAdded(state) {
     return function(dispatch) {      
-      console.log('Estado: ',state)
       return dispatch({ type: "CHANGE_ADDED", payload: state });
     };
   }

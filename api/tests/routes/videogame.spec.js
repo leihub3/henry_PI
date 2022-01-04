@@ -1,7 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// const { expect } = require('chai');
-// const session = require('supertest-session');
-// const app = require('../../src/app.js');
+
 const { Videogame, conn } = require('../../src/db.js');
 const chai = require('chai');
 const expect = chai.expect;
@@ -13,8 +10,8 @@ chai.use(chaiHttp)
 
 beforeEach(() => Videogame.sync({ force: true }));
 
-describe('Testing my Landing Page', () => {
-  it('The / route should GET a Welcome message', (done) => {
+describe('Testing /', () => {
+  it('should GET a Welcome message', (done) => {
     chai.request(server)
     .get('/')
     .end((err,res) => {
@@ -30,8 +27,8 @@ describe('Testing my Landing Page', () => {
 
 })
 
-describe('Testing the Home Page', () => {
-  it('/videogames should GET 100 videogames from the API', async () => {
+describe('Testing /videogames', () => {
+  it('should GET 100 videogames from the API', async () => {
     const res = await chai.request(server)
     .get('/videogames')
     //console.log({bodyLenght: res.body.length})
@@ -43,7 +40,7 @@ describe('Testing the Home Page', () => {
   }).timeout(15000)
 })
 
-describe('Testing if could GET a videogame by id', () => {
+describe('Testing /videogame/:id', () => {
   it('should GET a game if we pass through a valid id', async () => {
     /* Obtenemos un Id valido de la api */
     const res = await chai.request(server)
@@ -58,7 +55,6 @@ describe('Testing if could GET a videogame by id', () => {
 
   }).timeout(15000)
   it('should NOT GET a game if we pass through an INVALID id', async () => {
-    //let invalidIdGame = x1234b;
     const res = await chai.request(server)
     .get('/videogame/x1234b')
     res.should.have.status(200)
@@ -66,33 +62,5 @@ describe('Testing if could GET a videogame by id', () => {
     //console.log(res.body.status)
     //console.log(res2.body[0].id)
 
-  }).timeout(15000)
+  })
 });
-
-// const agent = session(app);
-// const videogame = {
-//   name: 'Super Mario Bros',
-//   description: 'description',
-//   background_image: 'hjjkl',
-//   platforms: 'Atari'
-// };
-
-// describe('Videogame routes', () => {
-//   before(() => conn.authenticate()
-//   .catch((err) => {
-//     console.error('Unable to connect to the database:', err);
-//   }));
-//   beforeEach(() => Videogame.sync({ force: true })
-//     .then(() => Videogame.create(videogame)));
-
-//   describe('GET /videogames', () => {
-//     it('should get 200',  () => {
-//       //agent.get('/videogames').expect(200)
-//       agent.get('/videogames')
-//       .expect(201)
-//       .then(response => console.log(response.body.length))
-//       //console.log(agent.get('/videogames'))
-//     });
-    
-//   });
-// });

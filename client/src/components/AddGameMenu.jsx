@@ -1,37 +1,37 @@
 import { useState, useEffect } from "react"
-import { connect, useDispatch } from "react-redux";
-import { addGame, changeAdded, getVideosDB } from '../redux/actions';
+import { connect, useDispatch} from "react-redux";
+import { addGame, changeAdded, cleanGameDetails, getVideosDB} from '../redux/actions';
 import { Loading } from "./Loading";
 import ('./AddGameMenu.css')
 
 
 function AddGame(props){
-    //console.log(props)
     const [pageState, setPageState] = useState('loading');
     const { changeAdded } = props;
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+
     useEffect(() => {
         changeAdded(null)
-    }, [])
+    }, [changeAdded])
 
     useEffect(() => {
         setPageState('loaded')
     }) 
 
     let formInitialState = {nombre:'', description:'', released:'', rating:5, generos:[], platforms:[], image_url:''}
-
     const [form, setForm] = useState(formInitialState);
+
     const [nombresGeneros, setNombresGeneros] = useState([]);
     const [nombresPlataformas, setNombresPlataformas] = useState([]);
-    //console.log(form.generos)
-
+    
+/************************* comienzo FUNCIONES PARA MANEJAR EVENTOS Y SETEAR LOS ESTADOS ****************/    
     function handleChangeNombre(event) {
         setForm({...form,nombre: event.target.value});
-      }
+    }
     
-      function handleChangeDescription(event) {
+    function handleChangeDescription(event) {
         setForm({...form,description: event.target.value});
-      }  
+    }  
 
     function handleChangeReleased(event) {
        setForm({...form, released: event.target.value});
@@ -47,8 +47,7 @@ function AddGame(props){
             setForm({...form, generos: [...generos,{genero: event.target.value}]});
         }else{
             setForm({...form, generos: generos.filter(g => g.genero !== event.target.value)})
-        }
-        
+        }        
     }
 
     function handleChangePlatforms(event){;
@@ -63,7 +62,6 @@ function AddGame(props){
     function handleChangeImageUrl(event){
         setForm({...form, image_url: event.target.value});
     }
-
 
     function handleNombresGeneros(nombre){
         const previousState = nombresGeneros;
@@ -82,17 +80,20 @@ function AddGame(props){
             setNombresPlataformas([...previousState, nombre])
         }
     }
+/************************* fin FUNCIONES PARA MANEJAR EVENTOS Y SETEAR LOS ESTADOS ****************/
 
-   if(document.getElementById("rating")){
-    var slider = document.getElementById("rating");
-    var output = document.getElementById("ratingValue");
-    output.innerHTML = slider.value;
-
-    slider.oninput = function() {
-    output.innerHTML = this.value;
-    }
+//Input type range
+    if(document.getElementById("rating")){
+        var slider = document.getElementById("rating");
+        var output = document.getElementById("ratingValue");
+        output.innerHTML = slider.value;
+        slider.oninput = function() {
+                            output.innerHTML = this.value;
+                        }
    }
 
+/*********************************** comienzo FUNCIONES FORMULARIO   ***************************************/   
+//Funcion VALIDA el Formulario antes de enviarlo
    function formSubmit(){
        //alert('Hola')
        let name = form.nombre;
@@ -104,29 +105,57 @@ function AddGame(props){
        
       
        if(name === ''){
-        document.getElementById('formName').classList.add('infoRequired')
-        // document.getElementById('requiredName').style.display = 'inline'
-       }else if(description === ''){
-        document.getElementById('formDescription').classList.add('infoRequired')
-        // document.getElementById('requiredDescription').style.display = 'inline'
-       }else if(genres.length === 0){
-        document.getElementById('selectBox').classList.add('infoRequired')
-        // document.getElementById('requiredGeneros').style.display = 'inline'
-       }else if(platforms.length === 0){
-        document.getElementById('selectBoxPlataformas').classList.add('infoRequired')
-        // document.getElementById('requiredPlatforms').style.display = 'inline'
-       }else if( r.test(urlImage) === false){
-        document.getElementById('formUrl').classList.add('infoRequired')
-        // document.getElementById('requiredUrl').style.display = 'inline'
+            document.getElementById('formName').classList.add('infoRequired')
+            // document.getElementById('requiredName').style.display = 'inline'
+        }else if(description === ''){
+            document.getElementById('formDescription').classList.add('infoRequired')
+            // document.getElementById('requiredDescription').style.display = 'inline'
+        }else if(genres.length === 0){
+            document.getElementById('selectBox').classList.add('infoRequired')
+            // document.getElementById('requiredGeneros').style.display = 'inline'
+        }else if(platforms.length === 0){
+            document.getElementById('selectBoxPlataformas').classList.add('infoRequired')
+            // document.getElementById('requiredPlatforms').style.display = 'inline'
+        }else if( r.test(urlImage) === false){
+            document.getElementById('formUrl').classList.add('infoRequired')
+            // document.getElementById('requiredUrl').style.display = 'inline'
         }else{
-            //document.formAddGame.submit();
-           setForm(formInitialState)
-           setNombresGeneros([])
-           setNombresPlataformas([])
-            props.addGame(form)
-            
+            setForm(formInitialState)
+            setNombresGeneros([])
+            setNombresPlataformas([])
+            props.addGame(form)   
         }
    }
+
+//Reseteo Campos
+   function nameReset(){
+        document.getElementById('formName').classList.remove('infoRequired');
+        document.getElementById('formName').value = ''
+   }
+
+   function descriptionReset(){
+        document.getElementById('formDescription').classList.remove('infoRequired');
+        document.getElementById('formDescription').value = ''
+        document.getElementById('requiredDescription').style.display = 'none'
+   }
+
+   function urlReset(){
+        document.getElementById('formUrl').classList.remove('infoRequired');
+        document.getElementById('formUrl').value = ''
+        document.getElementById('requiredUrl').style.display = 'none'
+   }
+
+   function genresReset(){
+        // document.getElementById('addGameGeneros').classList.remove('infoRequired');
+        document.getElementById('requiredGeneros').style.display = 'none'
+   }
+
+   function platformsReset(){
+        // document.getElementById('addGamePlataformas').classList.remove('infoRequired');
+        document.getElementById('requiredPlatforms').style.display = 'none'
+   }
+
+   //Funcion que controla el display del "select" de generos   
    var expanded = false;
    var expandedPlatform = false;
    function displayGeneros(){
@@ -144,6 +173,7 @@ function AddGame(props){
       }   
    }
 
+//Funcion que controla el display del "select" de plataformas
    function displayPlataformas(){
     // document.querySelector('select').style.display = 'none'
       if(!expandedPlatform){
@@ -159,147 +189,115 @@ function AddGame(props){
       }   
    }
 
+   //Funcion Orden Alfabetico
+   function SortArrayAlfAsc(x, y){
+    if (x.nombre < y.nombre) {return -1;}
+    if (x.nombre > y.nombre) {return 1;}
+    return 0;
+    }
 
-   function nameReset(){
-    document.getElementById('formName').classList.remove('infoRequired');
-    document.getElementById('formName').value = ''
-    document.getElementById('requiredName').style.display = 'none'
-   }
-
-   function descriptionReset(){
-    document.getElementById('formDescription').classList.remove('infoRequired');
-    document.getElementById('formDescription').value = ''
-    document.getElementById('requiredDescription').style.display = 'none'
-   }
-
-   function urlReset(){
-    document.getElementById('formUrl').classList.remove('infoRequired');
-    document.getElementById('formUrl').value = ''
-    document.getElementById('requiredUrl').style.display = 'none'
-   }
-
-   function genresReset(){
-    // document.getElementById('addGameGeneros').classList.remove('infoRequired');
-    document.getElementById('requiredGeneros').style.display = 'none'
-   }
-
-   function platformsReset(){
-    // document.getElementById('addGamePlataformas').classList.remove('infoRequired');
-    document.getElementById('requiredPlatforms').style.display = 'none'
-   }
-
+/*********************************** fin FUNCIONES FORMULARIO   ***************************************/
    
-
-if(props.gameAdded === true) {        
-    //alert('Video agregado exito')    
-    var modal = document.getElementById("myModal");
-    // var modal2 = document.getElementById("myModalForm");
+//Control para mostrar popup
+if(props.gameAdded === true) {    
+   var modal = document.getElementById("myModal");
    var span = document.getElementsByClassName("close2")[0];
-    modal.style.display = "block";
+   modal.style.display = "block";
     
-    //setTimeout(() => props.changeAdded(false), 10000);    
-    span.onclick = function() {
-       // dispatch(getVideosDB())
+   span.onclick = function() {
         modal.style.display = "none";
-        // modal2.style.display = "none";
-        window.location.href = "/videogames/home";
-      }
-      props.changeAdded(null)
-    //   dispatch(getVideosDB())
+        dispatch(cleanGameDetails())
+    }
+    props.changeAdded(null)
+    dispatch(getVideosDB())
 } 
 
-
+//Mientras la pagina se este cargando va a renderizar el componente Loading
 if(pageState === 'loading'){
     return (
         <div>{<Loading /> }</div>
     )
+//Cuando esta listo renderiza el componente     
 }else{
       return(
         <div id="addGameMenuContainer">
             <h1 className="pageTitle">ADD GAME</h1>
-            <div id='divForm'>            
-            <form method="POST" action="http://localhost:3001/videogame" name="formAddGame">
-                <div className="divsFlex">
-                    <div>
-                <label key={1} className="subtitle" title="Required">Game name*:               
-                <input data-testid='formNombre' type="text" name="nombre" id="formName" value={form.nombre} className="" placeholder="Enter the game name" onChange={(e) => {handleChangeNombre(e)}} onFocus={() => nameReset()}/></label> <br/>
-                </div>               
-                <div>
-                <label key={2} className="subtitle">Date of Release:</label>
-                <input type='date' name='lanzamiento' value={form.released} className='' onChange={(e) => handleChangeReleased(e)} />
-                </div>
-                </div>
-                <div className="divsFlex">
-                    <div>
-                    <label key={3} className="subtitle">Rating (between 0 and 5):</label>
-                <input type="range" className="slider" id="rating" name="rating" value={form.rating} min="0" max="5" onChange={(e) => handleChangeRating(e)}/><span id="ratingValue"></span><br/>
-                    </div>
-                    <div>
-                    <label key={4} className="subtitle">Image Url*:</label>
-                <input className='form-control' type="text" name="image_url" id="formUrl" value={form.image_url} className="" placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/><span id='requiredUrl' style={{display:'none', color:'red'}}> Campo requerido</span>
-                <br/>
-                    </div>
+                <div id='divForm'>            
+                    <form method="POST" name="formAddGame">
+                        <div className="divsFlex">
+                            <div>
+                                <label key={1} className="subtitle" title="Required">Game name*:               
+                                <input data-testid='formNombre' type="text" name="nombre" id="formName" value={form.nombre} className="" placeholder="Enter the game name" onChange={(e) => {handleChangeNombre(e)}} onFocus={() => nameReset()}/></label> <br/>
+                            </div>               
+                            <div>
+                                <label key={2} className="subtitle">Date of Release:</label>
+                                <input type='date' name='lanzamiento' value={form.released} className='' onChange={(e) => handleChangeReleased(e)} />
+                            </div>
+                        </div>
+                        <div className="divsFlex">
+                            <div>
+                                <label key={3} className="subtitle">Rating (between 0 and 5):</label>
+                                <input type="range" className="slider" id="rating" name="rating" value={form.rating} min="0" max="5" onChange={(e) => handleChangeRating(e)}/><span id="ratingValue"></span><br/>
+                            </div>
+                            <div>
+                                <label key={4} className="subtitle">Image Url*:</label>
+                                <input className='form-control' type="text" name="image_url" id="formUrl" value={form.image_url} className="" placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/><span id='requiredUrl' style={{display:'none', color:'red'}}> Campo requerido</span>
+                            <br/>
+                            </div>
+                        </div>
+                                <label key={5} className="subtitle" title="Required">Description*:</label>
+                                <textarea name='description' id='formDescription' value={form.description} className='form-control' rows='1' cols='40' placeholder="Enter a game description" onChange={(e) => {handleChangeDescription(e)}} onFocus={() => descriptionReset()}></textarea><span id='requiredDescription' style={{display:'none', color:'red'}}> Campo requerido</span>
 
-                </div>
-
-                <label key={5} className="subtitle" title="Required">Description*:</label>
-                <textarea name='description' id='formDescription' value={form.description} className='form-control' rows='1' cols='40' placeholder="Enter a game description" onChange={(e) => {handleChangeDescription(e)}} onFocus={() => descriptionReset()}></textarea><span id='requiredDescription' style={{display:'none', color:'red'}}> Campo requerido</span>
-
-                <div className="divsFlex">
-                    <div>
-                    <label key={6} className="subtitle">Genres:</label> <span id='requiredGeneros' style={{display:'none', color:'red'}}> Campo requerido</span><br/><div className="selectBox" id='selectBox' onClick={() => displayGeneros()}>                    
-                <a style={{width:'95%', textAlign:'left'}}>Select one or more genre</a>
-                <span id='genresSpan' className="triangleUp"></span>
-      </div>
-                <div id="addGameGenerosDiv" onMouseOut={() => displayGeneros()} >                   
-                {props.genres.map(g => (
-                <label key={g.id}>{g.nombre}<input type="checkbox" name="generos" value={g.id} onChange={(e) => {handleChangeGeneros(e); genresReset(); handleNombresGeneros(g.nombre)}} /></label> //displayNombresGeneros(g.nombre)
-                ))}
-                </div>
-                    </div>  
+                        <div className="divsFlex">
+                            <div>
+                                <label key={6} className="subtitle">Genres:</label> <span id='requiredGeneros' style={{display:'none', color:'red'}}> Campo requerido</span><br/><div className="selectBox" id='selectBox' onClick={() => displayGeneros()}>                    
+                                <a style={{width:'95%', textAlign:'left'}}>Select one or more genre</a>
+                                    <span id='genresSpan' className="triangleUp"></span>
+                            </div>
+                            <div id="addGameGenerosDiv" onMouseOut={() => displayGeneros()} >                   
+                            {props.genres.sort(SortArrayAlfAsc).map(g => (
+                                <label key={g.id}>{g.nombre}<input type="checkbox" name="generos" value={g.id} onChange={(e) => {handleChangeGeneros(e); genresReset(); handleNombresGeneros(g.nombre)}} /></label> //displayNombresGeneros(g.nombre)
+                            ))}
+                            </div>
+                        </div>  
                     
-                    <div>
-                    <label key={8} className="subtitle" title="Required">Platforms*:</label><span id='requiredPlatforms' style={{display:'none', color:'red'}}> Campo requerido</span><br/>
+                        <div>
+                                <label key={8} className="subtitle" title="Required">Platforms*:</label><span id='requiredPlatforms' style={{display:'none', color:'red'}}> Campo requerido</span><br/>
                 
-                <div className="selectBoxPlataformas" id='selectBoxPlataformas' onClick={() => displayPlataformas()}>                    
-                <a style={{width:'95%', textAlign:'left'}}>Select one or more platform</a>
-                <span id='platformsSpan' className="triangleUp"></span>
-      </div>
-                <div id="addGamePlataformas" onMouseOut={() => displayPlataformas()} style={{display:'none'}}>
-                {props.platforms.map(g => (
-                   <label key={g.id} >{g.nombre}<input  type="checkbox" id="formPlatforms" name="plataformas" value={g.nombre} onChange={(e) => {handleChangePlatforms(e); platformsReset(); handleNombresPlataformas(g.nombre)}} /></label>
-                ))}
-                {/* <div id='divMostrarPlataformas' style={{width:'100%'}}></div> */}
-                </div>                        
+                        <div className="selectBoxPlataformas" id='selectBoxPlataformas' onClick={() => displayPlataformas()}>                    
+                                <a style={{width:'95%', textAlign:'left'}}>Select one or more platform</a>
+                                    <span id='platformsSpan' className="triangleUp"></span>
+                        </div>
+                        <div id="addGamePlataformas" onMouseOut={() => displayPlataformas()} style={{display:'none'}}>
+                            {props.platforms.sort(SortArrayAlfAsc).map(g => (
+                                <label key={g.nombre} >{g.nombre}<input  type="checkbox" id="formPlatforms" name="plataformas" value={g.nombre} onChange={(e) => {handleChangePlatforms(e); platformsReset(); handleNombresPlataformas(g.nombre)}} /></label>
+                            ))}
+                        </div>                        
                     </div>
-
                 </div>    
 
-                <div className="divsGrid">
-                     <div>
-                     <div id='divMostrarGeneros' style={{height:'50px', overflow:'auto', padding:'0px 10px', color:'var(--main-bg-color)', position:'relative'}}>{nombresGeneros.join(" | ")}</div>
-                     </div>
-                     <div>
-                     <div id='divMostrarPlataformas' style={{height:'50px', overflow:'auto', padding:'0px 10px', color:'var(--main-bg-color)', position:'relative'}}>{nombresPlataformas.join(" | ")}</div>    
-                     </div>
-                     </div> 
-                <button type="button" onClick={() => formSubmit()} className="btn btn-primary" >SUBMIT</button>
-   
-
+                        <div className="divsGrid">
+                            <div>
+                                <div id='divMostrarGeneros' style={{height:'50px', overflow:'auto', padding:'0px 10px', color:'var(--main-bg-color)', position:'relative'}}>{nombresGeneros.join(" | ")}</div>
+                            </div>
+                            <div>
+                                <div id='divMostrarPlataformas' style={{height:'50px', overflow:'auto', padding:'0px 10px', color:'var(--main-bg-color)', position:'relative'}}>{nombresPlataformas.join(" | ")}</div>    
+                            </div>
+                        </div> 
+                        <button type="button" onClick={() => formSubmit()} className="btn btn-primary" >SUBMIT</button>
                 </form>
             </div>
-            <div id="myModal" className="modalGameAdded">
+            <div id="myModal" className="modalGameAdded">        
+                <div className="modal-content-added">
+                    <span className="close2">&times;</span>
+                    <p>Game <span className="spanNameAdded"> { (typeof props.gameDetails === 'string') ? props.gameDetails : null } </span> Added Satisfactory.</p>
+                </div>
         
-          <div className="modal-content-added">
-            <span className="close2">&times;</span>
-            <p>Game <span className="spanNameAdded"> { (typeof props.gameDetails === 'string') ? props.gameDetails : null } </span> Added Satisfactory.</p>
-          </div>
-        
-        </div>
+            </div>
             
         </div>
-    )
-                }
+       )
+    }
 }
 
 const mapStateToProps = state => ({

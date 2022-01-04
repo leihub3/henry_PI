@@ -21,19 +21,17 @@ axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <BrowserRouter>
-    <Routes>      
-    <Route path='*' element={<NotFound />} />
-    <Route path="/" element={<Landing />} />
-      <Route path='/videogames/' element={<App />}>      
-        <Route path="home" element={<Home />} />
-        <Route path="addGame" element={<AddGameMenu /> } /> 
-        <Route path="videogame/:id" element={<GameDetails /> } />
-      </Route>
-
-    </Routes>
-
-    </BrowserRouter> 
+      <BrowserRouter>
+        <Routes>      
+          <Route path='*' element={<NotFound />} />
+          <Route path="/" element={<Landing />} />
+          <Route path='/videogames/' element={<App />}>     
+              <Route path="home"/>
+              <Route path="addGame"/>
+              <Route path="videogame/:id"/>
+          </Route>
+        </Routes>
+      </BrowserRouter> 
     </Provider>   
   </React.StrictMode>,
   document.getElementById('root')

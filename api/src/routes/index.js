@@ -9,8 +9,6 @@ const { API_KEY} = process.env;
 // // Ejemplo: const authRouter = require('./auth.js');
 
  const { Videogame, Genero } = require('../db');
- //const addgame = require('../routes/addgame')
-
  const router = Router();
 
 
@@ -19,7 +17,6 @@ const { API_KEY} = process.env;
 // Ejemplo: router.use('/auth', authRouter);
 //router.use('/addgame', addgame);
 
-//router.use(express.json());
 router.get('/', (req,res) => {
   try{
     res.status(200).send({message:'Welcome to the All Times Video Games Collection'})
@@ -163,113 +160,96 @@ router.get('/videogames', async function(req, res){
               generos: generos,
               origen: 'api'
             })
-          })
-
-         
+          })         
 
         res.json(resultado) 
 
-        }
-              
+        }             
        
     }
     catch (err) {
         res.send(err)
-    }
-   
+    }   
     
 })
 
 
 router.get('/videogame/:idVideogame', async function(req, res){
-try{
-    //console.log('Hola params: ', req.params)
-    const { idVideogame } = req.params;
+  try{
+      //console.log('Hola params: ', req.params)
+      const { idVideogame } = req.params;
 
-    let resultado = []; 
+      let resultado = []; 
 
-    if(!idVideogame.toString().includes('-')){
-        const gameApi = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`)
-    //(gameApi.hasOwnProperty('detail')) ? gameApi = '' : gameApi  = 
-   
- 
-    //console.log('tenemos')
-   
-        let  gameApiArray = [gameApi.data];
-        
-       gameApiArray.forEach(g =>{
-            let generos = [];
-            g.genres.forEach(g => {
-                generos.push({
-                  nombre: g.name
-                });
-                })        
-                
-            resultado.push({
-              id: g.id,
-              name: g.name,
-              background_image: g.background_image,
-              description: g.description_raw,
-              platforms: g.platforms,
-              rating: g.rating,
-              released: g.released,
-              generos: generos,
-              website: g.website,
-              origen: 'api'
+      if(!idVideogame.toString().includes('-')){
+          const gameApi = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`)
+    
+          let  gameApiArray = [gameApi.data];
+          
+        gameApiArray.forEach(g =>{
+              let generos = [];
+              g.genres.forEach(g => {
+                  generos.push({
+                    nombre: g.name
+                  });
+                  })        
+                  
+              resultado.push({
+                id: g.id,
+                name: g.name,
+                background_image: g.background_image,
+                description: g.description_raw,
+                platforms: g.platforms,
+                rating: g.rating,
+                released: g.released,
+                generos: generos,
+                website: g.website,
+                origen: 'api'
+              })
             })
-          })
- 
-
-    }else{
-        // console.log('Hola params: ', req.params)
-       // resultado.push({name: 'prueba'})
-    const gameDb = await Videogame.findByPk(idVideogame, {
-        attributes: ['name','description','background_image', 'released','rating','platforms'],
-        include    : [{ model: Genero, 
-            through: {attributes: []},
-            attributes:{include:  ['nombre'], exclude: ['id', 'createdAt','updatedAt']}}]
-    });
-
-    //console.log(gameDb.dataValues.generos[0].dataValues.nombre)
- let generos = []; 
-        gameDb.dataValues.generos.forEach(g =>{
-                     
-                generos.push({
-                  nombre: g.dataValues.nombre
-                });
-                
-            })      
-                
-            resultado.push({
-              id: gameDb.dataValues.id,
-              name: gameDb.dataValues.name,
-              background_image: gameDb.dataValues.background_image,
-              description: gameDb.dataValues.description,
-              platforms: gameDb.dataValues.platforms,
-              rating: gameDb.dataValues.rating,
-              released: gameDb.dataValues.released,
-              generos: generos,
-              website: '',
-              origen: 'db'
-            })
-         
-
-    }
-    //console.log(resultado)
-    res.json(resultado) 
-
-}
-catch(e){
-    res.send(e)
-}
-        
-
   
+
+      }else{
+      const gameDb = await Videogame.findByPk(idVideogame, {
+          attributes: ['name','description','background_image', 'released','rating','platforms'],
+          include    : [{ model: Genero, 
+              through: {attributes: []},
+              attributes:{include:  ['nombre'], exclude: ['id', 'createdAt','updatedAt']}}]
+      });
+
+  let generos = []; 
+          gameDb.dataValues.generos.forEach(g =>{
+                      
+                  generos.push({
+                    nombre: g.dataValues.nombre
+                  });
+                  
+              })      
+                  
+              resultado.push({
+                id: gameDb.dataValues.id,
+                name: gameDb.dataValues.name,
+                background_image: gameDb.dataValues.background_image,
+                description: gameDb.dataValues.description,
+                platforms: gameDb.dataValues.platforms,
+                rating: gameDb.dataValues.rating,
+                released: gameDb.dataValues.released,
+                generos: generos,
+                website: '',
+                origen: 'db'
+              })
+      }
+      //console.log(resultado)
+      res.json(resultado) 
+
+  }
+  catch(e){
+      res.send(e)
+  }     
 })
 
 router.get('/genres', async function(req,res){
     try{      
-        //console.log(API_KEY)
       const genres = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
       //console.log(genres.data.results)
       let arrayGeneros = [];
@@ -291,47 +271,26 @@ router.get('/genres', async function(req,res){
 })
 
 router.post('/videogame', async function(req, res){
-   
-    //name, released, rating, platform
-   //res.send(req.body.name);
-    
-    //console.log("soy el body: ", nombre, lanzamiento, rating, plataformas, generos, image_url)
-    // res.status(200).json(req.body);
     try{
-      //console.log("soy el body: ",req.body);
       var { nombre, description, released, rating, platforms, generos, image_url } = req.body;
-    //(typeof plataformas === 'object') ? plataformas = plataformas.join('; ') : plataformas=plataformas
+      let generosToAdd = [];
+      generos.forEach(g => {
+        generosToAdd.push(g.genero)
+      })
 
-    let generosToAdd = [];
-    generos.forEach(g => {
-      generosToAdd.push(g.genero)
-    })
-
-    //console.log('generosAdd: ',generosToAdd)
-
-    let plataformasToAdd='';
-    platforms.forEach((p,i) =>{
-      if(i !== platforms.length-1){
-        plataformasToAdd += p.platform + '; ';
-    }else{
-        plataformasToAdd += p.platform + '.';
-    }
-      //plataformasToAdd += p.platform + '; '
-    })
-        const nuevoVideo = await Videogame.create({name: nombre, description:description, released: released,rating:rating, platforms: plataformasToAdd, background_image: image_url});
-        //const nuevoGenero = await Genero.create({nombre: 'Adventure'})
-       
-
-        const nuevoVideoGeneros = await nuevoVideo.addGenero(generosToAdd)
-
-        //console.log("El nuevo registro es:", nuevoVideo.dataValues);
-        //res.send({result:'Game Added Satisfatory'})
-        //console.log({result:'Game Added Satisfatory'})
-
-        res.status(200).json(nuevoVideo.dataValues.name)
-
-        //res.redirect('http://localhost:3000/videogames/home')
-
+      let plataformasToAdd='';
+      platforms.forEach((p,i) =>{
+        if(i !== platforms.length-1){
+          plataformasToAdd += p.platform + '; ';
+        }else{
+          plataformasToAdd += p.platform + '.';
+        }
+        //plataformasToAdd += p.platform + '; '
+      })
+      const nuevoVideo = await Videogame.create({name: nombre, description:description, released: released,rating:rating, platforms: plataformasToAdd, background_image: image_url});
+      const nuevoVideoGeneros = await nuevoVideo.addGenero(generosToAdd)
+      res.status(200).json(nuevoVideo.dataValues.name)
+      //res.redirect('http://localhost:3000/videogames/home')
     }
     catch(error){
         res.send(error)

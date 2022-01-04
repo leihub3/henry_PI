@@ -4,10 +4,9 @@ import './Navbar.css'
 
 
 export default function Navbar(){
+  const [menu, setMenu] = useState({active:'home'});
 
-   const [menu, setMenu] = useState({active:'home'});
-
-   function handleClickMenu(e,value){
+  function handleClickMenu(e,value){
     //e.preventDefault();
     setMenu({active: value})
   }
@@ -27,21 +26,15 @@ export default function Navbar(){
       default:
       claseHome = 'active';
       claseAddGame = 'pasive';
-    }
+  }
     
-    return(
-        <div className="topnav">
-            <Link className={claseHome} to='home' onClick={(e) =>{ handleClickMenu(e,'home')}}>HOME</Link>
-            <Link className={claseAddGame} to='addGame' onClick={(e) =>{ handleClickMenu(e,'addGame')}}>ADD GAME</Link>
-  {/* <a className="active" href="/home">Home</a> */}
-  {/* <a href="/addGame">ADD</a> */}
-  <div className="topnav-right">
-    The All Time Video Games Collection
-
-
-    {/* <a href="#search">Search</a> */}
-    {/* <a href="#about">About</a> */}
-  </div>
-</div>
-    )
+  return(
+      <div className="topnav">
+          <Link className={claseHome} to='home' onClick={(e) =>{ handleClickMenu(e,'home')}}>HOME</Link>
+          <Link className={claseAddGame} to='addGame' onClick={(e) =>{ handleClickMenu(e,'addGame')}}>ADD GAME</Link>
+          <div className="topnav-right">
+          The All Time Video Games Collection
+          </div>  
+      </div>
+  )
 }

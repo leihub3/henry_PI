@@ -23,7 +23,7 @@ describe('Videogame model', () => {
       it('should throw an error if some of the required values are null', (done) => {
         Videogame.create(videogame)
         .then((res) => {
-          done(new Error('It requires a valid name'));
+          done(new Error('It requires a valid background_image'));
         })
         .catch((err) => {
           done();
