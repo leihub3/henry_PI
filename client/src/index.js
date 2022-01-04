@@ -8,7 +8,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Landing from './components/Landing';
 import Home from './components/Home';
-import AddGame from './components/AddGame';
+import AddGameMenu from './components/AddGameMenu';
 import GameDetails from './components/GameDetails';
 import NotFound from './components/NotFound';
 import dotenv from 'dotenv'
@@ -27,7 +27,7 @@ ReactDOM.render(
     <Route path="/" element={<Landing />} />
       <Route path='/videogames/' element={<App />}>      
         <Route path="home" element={<Home />} />
-        <Route path="addGame" element={<AddGame /> } /> 
+        <Route path="addGame" element={<AddGameMenu /> } /> 
         <Route path="videogame/:id" element={<GameDetails /> } />
       </Route>
 

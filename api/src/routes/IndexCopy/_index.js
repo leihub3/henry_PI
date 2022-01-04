@@ -37,7 +37,7 @@ router.get('/videogames', async function(req, res){
             const gamesDb = await Videogame.findAll({
                 where:{                   
                     name: {
-                        [Op.iLike]: `%${name}%`, 
+                        [Op.iLike]: `%${name}`, 
                     }
                 },
                 attributes: ['id','name','background_image','platforms','rating','released'], 
@@ -50,7 +50,7 @@ router.get('/videogames', async function(req, res){
 
             let limitApi = 15 - gamesDb.length;
 
-            const games = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}&page_size=${limitApi}`)
+            const games = await axios.get(`http://localhost:3000/videogames.json`) // &search=${name}
             let allGames = [...games.data.results]
         //console.log(games.data.results)
         const resultado = [];
@@ -108,11 +108,11 @@ router.get('/videogames', async function(req, res){
             }
         }else{
 
-        const games = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1&page_size=40`)
-        const games2 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=5&page_size=40`)
-        const games3 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=7&page_size=20`)
-
-        let allGames = [...games.data.results, ...games2.data.results, ...games3.data.results]
+          const games = await axios.get(`http://localhost:3000/videogames.json`)
+          const games2 = await axios.get(`http://localhost:3000/videogames2.json`)
+          const games3 = await axios.get(`http://localhost:3000/videogames3.json`)
+  
+          let allGames = [...games.data.results, ...games2.data.results, ...games3.data.results]
         //console.log(games.data.results)
         const resultado = [];
 

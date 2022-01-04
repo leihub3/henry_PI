@@ -36,7 +36,7 @@ export default function Navbar(){
   {/* <a className="active" href="/home">Home</a> */}
   {/* <a href="/addGame">ADD</a> */}
   <div className="topnav-right">
-    The All Time's Video Games Collection
+    The All Time Video Games Collection
 
 
     {/* <a href="#search">Search</a> */}

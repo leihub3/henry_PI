@@ -5,12 +5,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--body-bg-color);
+  background-color: rgb(1, 1, 39);
+    /* var(--body-bg-color); */
+background-image: url("http://localhost:3000/vintage-speckles.png") !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+body, #root, html{
+  margin: 0px;
+  width: 100%;
 }
 
 :root {
@@ -20,8 +27,18 @@ code {
   --fourth-bg-color: #a6edd3;
   --body-bg-color: #022d50;
   --logo-bg-color: #ffdf01;
+  --blue-bg-color: rgb(1, 1, 39);
   --main-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
+}
+
+h1.pageTitle{
+  font-size: xxx-large;
+  margin-top: -5px !important; 
+  color: var(--main-bg-color);
+  -webkit-text-fill-color: black;
+  -webkit-text-stroke-color: var(--main-bg-color);
+  -webkit-text-stroke-width: 2.00px; 
 }
 
 .form-control{
@@ -39,4 +56,31 @@ code {
 .title, .subtitle{
   color: var(--main-bg-color);
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  z-index: 999999;
+  position: absolute;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+  /* margin-top: 250px;
+    margin-bottom: 150px; */
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--second-bg-color); 
+  border-radius: 10px;
+  height: 10px !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-bg-color); 
+}
+
 

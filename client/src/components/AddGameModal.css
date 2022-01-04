@@ -1,0 +1,366 @@
+@media only screen and (max-width: 600px) {
+  /* For mobile phones: */
+  
+
+  #addGamePlataformas{
+    grid-template-columns: 50% 50%;
+    padding: 10px 70px 10px 25px;
+  }
+  
+}
+
+@media only screen and (min-width: 600px) { 
+    /*Tablets*/
+   
+
+    #addGamePlataformas{
+      grid-template-columns: 33% 33% 33%;
+      padding: 10px 120px 10px 0px;
+    }
+  
+
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* For Desktop: */
+  /* #addGameGeneros{
+    grid-template-columns: 25% 25% 25% 25%;
+    padding: 10px 300px 10px 150px;
+  } */
+
+  #addGamePlataformas{
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    padding: 10px 300px 10px 150px;
+  }
+}  
+
+label{
+    font-weight: bold;
+    line-height: 1.5em;
+}
+
+
+#addGameContainer{
+    /* background-color: var(--third-bg-color); */
+    /* padding-bottom: 50px; */
+}
+
+#divForm{
+  position: relative;
+  left: 3%;
+  width:90%;
+  padding: 5px 50px;
+  /* background-color: black; var(--fourth-bg-color); */
+  border-radius: 12px;
+  margin-top: -20px !important;
+}
+
+#addGameContainer input[type=text], #addGameContainer input[type=date],
+#addGameContainer input[type=range], #addGameContainer input[type=button], .addGameSelect{
+  width: 97%;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  /*margin: 8px 0; */
+  border: 0px !important;
+  border-radius: 4px !important;
+}
+
+#selectBox{
+  display: flex;
+  width: 92%;
+  /* box-sizing: border-box; */
+  padding: 12px 20px;
+  margin-left: 10px;
+  margin-right: 45px;
+  background-color: var(--main-bg-color);
+  border: 0px !important;
+  border-radius: 4px !important;
+  cursor: pointer;
+  color: black;
+    font-weight: normal;
+}
+
+#addGameContainer #selectBoxPlataformas{
+  display: flex;
+  width: 95%;
+  /* box-sizing: border-box; */
+  padding: 12px 20px;
+  margin-left: 45px;
+  background-color: var(--main-bg-color);
+  border: 0px !important;
+  border-radius: 4px !important;
+  cursor: pointer;
+  color: black;
+  font-weight: normal;
+}
+
+#addGameContainer #addGameGenerosDiv{
+  display: none;
+  grid-template-columns: 100%;
+  position: absolute !important;
+  left: 60px;
+  bottom: 206px;
+  height: 250px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  text-align: right;
+  box-sizing: border-box;
+  width: 34.5%;
+  padding: 10px 10px 10px -10px;
+  border: 1px dashed var(--main-bg-color);
+  background-color: var(--third-bg-color);
+  transition: all 2s ease !important;
+  color: black;
+}
+
+#addGameContainer #addGamePlataformas{
+  display: none;
+  grid-template-columns: 100%;
+  position: absolute;
+  left: 396px;
+  bottom: 206px;
+  height: 250px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  text-align: right;
+  box-sizing: border-box;
+  width: 36.5%;
+  padding: 2px 10px 10px 10px;
+  border: 1px dashed var(--main-bg-color);
+  background-color: var(--third-bg-color);
+  transition: all 2s ease !important;
+  color: black;
+}
+
+.triangleDown {
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 25px solid #555;
+}
+
+.triangleUp {
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 25px solid #555;
+}
+
+
+#addGameContainer button{
+    background-color: var(--second-bg-color);
+    position: relative;
+    left:-9%;
+    border-radius: 10px;
+    border: 0px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2pt;
+    font-size: 18px;
+    margin: 20px 10px 20px 10px;
+    padding: 10px 40px 10px 40px;
+    cursor: pointer;
+    box-shadow: 0 9px #999;
+    width: 50%;
+}
+
+#addGameContainer button:hover{
+    background-color: var(--second-bg-color);
+    
+}
+
+#addGameContainer button:active {
+  background-color: var(--second-bg-color);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#formName{
+    background-color: var(--main-bg-color);
+    height: 49px !important;
+    vertical-align: text-top;
+    margin-left: 13px;
+    margin-right: 13px;
+    width: 94% !important;
+  }
+
+  .divsFlex{
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .divsGrid{
+    display: grid;
+    grid-template-columns: 48% 48%;
+    grid-gap: 4%;
+    text-align: justify;
+  }
+
+  input[type=date]{
+    width: 105% !important;   
+    background-color: var(--main-bg-color);
+    vertical-align: text-top;
+    margin-left: 12px
+  }
+
+  #formUrl{
+   width: 116% !important;
+   margin-left: -7px !important;
+   background-color: var(--main-bg-color);
+}
+
+  #addGameContainer input[type=text], #addGameContainer input[type=date]{
+    padding:15px 20px !important;
+  }
+  #formName{
+    padding: 15px 20px !important;
+  }
+
+  #ratingValue{
+      color: var(--main-bg-color);
+      font-weight: bold;
+      margin-right: 12px;
+  }
+
+  #addGameContainer textarea::placeholder{
+  color: black !important;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+}
+
+#addGameContainer textarea{
+  position: relative;
+  height: auto;
+  transition: all 0.99 ease;
+  overflow: hidden;
+  margin-bottom: 0px !important; 
+  width: 83%;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  /* margin: 8px 0; */
+  left:-7% !important;
+  border: 0px !important;
+  border-radius: 4px !important;
+}
+
+.description{
+  position: relative;
+  left:-10%;
+}
+
+#addGameContainer textarea:focus{
+    height: 4em;
+    background-color: white !important;
+    background:var(--third-bg-color);
+    color:var(--main-bg-color);
+    font-weight: bold;
+    overflow: auto;
+  } 
+
+  #addGameContainer textarea:focus::placeholder{
+    color:transparent !important;
+  }
+
+  .slider {
+    padding: 0px !important;
+    -webkit-appearance: none;
+    width: 85% !important;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin: 4px 10px 20px -3px;
+    vertical-align: text-top;
+  }
+
+ 
+  .slider:hover {
+    opacity: 1;
+  }
+
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--main-bg-color);
+    cursor: pointer;
+  }  
+
+  #addGameContainer input[type=text]:focus{
+      background:var(--third-bg-color);
+      color:var(--main-bg-color);
+      font-weight: bold;
+  }
+
+  input::placeholder{
+    color: black;
+  }
+
+  input:focus::placeholder{
+    color: transparent;
+  }
+
+   .infoRequired{
+      border: 1px solid red !important;
+      background-color:rgb(245, 171, 171) !important ;
+      border-radius: 10px;
+      color: black !important;
+  }
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 20px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    transition: all 3ms ease;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    /* background-color: var(--body-bg-color); */
+    background-color: rgb(1, 1, 39);
+    /* var(--body-bg-color); */
+background-image: url("http://localhost:3000/vintage-speckles.png") !important;
+    color: var(--third-bg-color);
+    font-weight: bold;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--main-bg-color);
+    width: 60%;
+    height: 88%;
+    border-radius: 10px;
+    transition: all 0.99s ease;
+  }
+  
+  .spanName{
+    color: var(--logo-bg-color);
+  }
+  
+  /* The Close Button */
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }

@@ -10,7 +10,7 @@
     }
   }
 
-  @media only screen and (max-width: 768px) { 
+  @media only screen and (min-width:601px) and (max-width: 768px) { 
       /*Tablets*/
       #detailsText{
         left: 0%;/*705px*/
@@ -24,14 +24,14 @@
   }
  
   
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
     /* For Desktop: */
     #detailsText{
-        left: 705px;/*705px*/
+    left: 705px;/*705px*/
     }
     #textBox{
-        width: 69vh;
-        padding: 0px 10px;
+    width: 90vh;
+    padding: 0px 5px 0px 80px;
     }
   }  
 
@@ -39,34 +39,123 @@
     font-family: var(--main-font-family);
 }
 
+#titleBig{
+    position: absolute;
+    color: white;
+    bottom: 10px;
+    width: 50%;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+#titleBig > span{
+    text-transform: uppercase;
+    opacity: 0.65;
+    font-size: xxx-large;
+    font-weight: bolder;
+    transition: all 2s ease-in-out;
+}
+
+#titleBig > p{
+    font-size: larger;
+}
+
+#textBox{
+    margin-top: -20px;
+}
+
+#textBox h1{
+font-size: xxx-large;
+margin-top: 30px !important;
+left:-130px;
+color: var(--main-bg-color);
+-webkit-text-fill-color: black;
+  -webkit-text-stroke-color: var(--main-bg-color);
+  -webkit-text-stroke-width: 2.00px; 
+}
+
+#textBox h2{
+    font-size: xxx-large;
+    margin-top: 0px;
+}
+
+#textBox b{
+    color: var(--main-bg-color);
+    font-size: larger;
+}
+
 #detailsContainer{
-    background-position: -300px;
-    background-size: cover;
+    background-position-x: -60px;
+    background-position-y: -0px;
+    background-size:contain;
     background-repeat:no-repeat;
     position: relative;
     left:0px;
     width: 100%;
-    height: 100vh;
+    height: 92vh;
     overflow:hidden;
 }
 
 #detailsText{
     position: absolute;
-    background-color: var(--fourth-bg-color);
+    background-color: var(--blue-bg-color);
+   /* var(--body-bg-color); */
+background-image: url("http://localhost:3000/vintage-speckles.png") !important;
     width: 720px;
     height: 100%;
-    border-left: 10px solid var(--main-bg-color);    
+    border-left: 10px solid var(--main-bg-color); 
+    border-top-left-radius: 25%;
+    border-bottom-left-radius: 25%;   
     text-align:center;
     padding-right: 250px;
+    color: #FFFFFF;
+text-shadow: 3px 2px 3px rgba(255,255,255,0.1);
+/* box-shadow: 5px 10px 10px 4px rgba(0,0,0,0.75);
+-webkit-box-shadow: 5px 10px 10px 4px rgba(0,0,0,0.75);
+-moz-box-shadow: 5px 10px 10px 4px rgba(0,0,0,0.75); */
 }
 
 
+.flexDiv{
+   width: 50% !important;
+   padding:10px 10px; 
+}
+
+.divSeparator{
+    border-right: 1px solid var(--main-bg-color);
+}
+
+.flexDiv2{
+    width: 33% !important; 
+ }
 
 #txtBox.txtDetailColor{
     color: var(--main-bg-color) !important; 
 }
 
 .txtDescription{
-    height: 250px;
+    height: 200px;
+    /* background-color: var(--third-bg-color); */
+    font-size: 0.94em;
+    color: lightgray;
    overflow:auto;
+   border-radius: 10px;
+   /* border: 1px dashed white; */
+   text-align: justify;
+   padding: 0px 10px 10px 10px;
+   /* box-shadow: 5px 10px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 5px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 5px 10px 5px 0px rgba(0,0,0,0.75); */
 }
+
+.txtDescription p::first-letter {
+  float: left;
+  width: 0.7em;
+  font-size: 600%;
+  font-family: var(--main-font-family);
+  line-height: 80%;
+  color: var(--fourth-bg-color);
+  padding-right: 3px;
+   
+  }
+

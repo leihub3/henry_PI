@@ -32,7 +32,8 @@ function reducer(state = initialState, action){
      case 'CARGAR_VIDEOS_DB':
         return {
           ...state,
-          videoGames: state.videoGames.concat(action.payload)
+          videoGames: action.payload
+          // state.videoGames.concat(action.payload)
      }
      case 'LIMPIAR_VIDEOS_DB':
         return {
@@ -70,8 +71,10 @@ function reducer(state = initialState, action){
         ...state,
         videoGameDetails: state.videoGameDetails = []
    }   
-    }
+   default:
     return state;
+    }
+    
   }
 
   //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), 

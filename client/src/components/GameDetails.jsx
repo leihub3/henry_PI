@@ -32,6 +32,8 @@ let generos = '';
         }
     })
 
+    }else{
+        
     }
    
 
@@ -47,33 +49,45 @@ if(game.origen === 'api'){
         
     })
 }else{
-    plataformas = game.platforms + '.';
+    plataformas = game.platforms;
 }
 
-let Background = game.background_image;
+let Background; 
+    (game.background_image) ? Background = game.background_image : Background= 'http://localhost:3000/landing.jpg';
 
 let web;
 if(game.website !== ''){
-   web = <p className="txtDetailColor"><b>Website: </b><a href={game.website} target='_blank' >click here</a></p>
+   web = <div className="txtDetailColor flexDiv2"><b>Website: </b><br></br><a href={game.website} target='_blank' >click here</a></div>
 }else{
    web = '';
 }
     
     return(
-        <div id="detailsContainer" style={{backgroundImage: `url(${Background})`}}>
+        <div id="detailsContainer" style={{backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7), rgba(1,1,39,1)), url(${Background})`}}>
+            <div id="titleBig" >
+                <span>{game.name}</span>
+                <p>{plataformas}</p>            
+            </div>
             <div id="detailsText">
                 <div id="textBox">
-                <h1>Game Details</h1>
-            <h2 className="txtDetailColor">{game.name}</h2>
-            <p className="txtDetailColor"><b>Genres: </b>{generos}</p>
-            <p className="txtDetailColor"><b>Platforms: </b>{plataformas}</p>
-                {/* <img src={game.background_image} width='600px' /> */}
-                <p className="txtDetailColor"><b>Rating: </b>{game.rating}</p>
-                <p className="txtDetailColor"><b>Released: </b>{game.released}</p>
+                <h1 className='pageTitle'>About The Game</h1>
+            {/* <h2 className="txtDetailColor">{game.name}</h2> */}
+            <div className='flexDetails' style={{display:'flex'}}>
+            <div className="txtDetailColor flexDiv divSeparator"><b>Genres: </b><br></br>{generos}</div>
+            <div className="txtDetailColor flexDiv"><b>Platforms: </b><br></br>{plataformas}</div>
+            </div> 
+            <br></br>
+            <div style={{display:'flex'}}>
+                <div className="txtDetailColor flexDiv2"><b>Rating: </b><br></br>{game.rating}</div>
+                <div className="txtDetailColor flexDiv2"><b>Released: </b><br></br>{game.released}</div>
                 {web}
+            </div>      
+            <br></br>
+            {game.description ? (<div> <b>Description: </b>
              <div className="txtDescription">
-             <p ><b>Description: </b>{game.description}</p>
-                 </div>   
+             <p >{game.description}</p>
+                 </div> </div>) : null}
+                 
                
                 </div>
            

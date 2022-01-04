@@ -13,7 +13,9 @@ export default function Games({getGameDetails, game}){
     game.generos.forEach(g => {
     generos += g.nombre + ' '
         })
-    let Background = game.background_image;
+    let Background; 
+    (game.background_image) ? Background = game.background_image : Background= 'http://localhost:3000/landing.jpg';
+    //console.log(Background)
 
     return(
         

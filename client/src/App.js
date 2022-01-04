@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Home from './components/Home';
-import AddGame from './components/AddGame';
+import AddGameMenu from './components/AddGameMenu';
 import { getVideosDB, getGenresAPI, getPlatformsAPI } from './redux/actions';
 import { useEffect } from 'react';
 import GameDetails from './components/GameDetails';
@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import { Loading } from './components/Loading';
 
 function App(props) {
+  console.log("App props: ", props)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function App(props) {
   dispatch(getGenresAPI())
   dispatch(getVideosDB())
   dispatch(getPlatformsAPI())
-  },[dispatch])
+  },[])
 
 
   return (
@@ -29,7 +30,7 @@ function App(props) {
       
       
       <Route path="/videogame/:id" element={<GameDetails/> } /> 
-      <Route path="/addGame" element={<AddGame/> } /> 
+      <Route path="/addGame" element={<AddGameMenu /> } /> 
       </Routes>
       
     </div>

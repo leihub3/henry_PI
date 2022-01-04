@@ -4,15 +4,17 @@ import Games from "./Games"
 import { Loading } from "./Loading"
 import './Home.css'
 import { useState, useEffect } from 'react'
+import AddGameModal from './AddGameModal'
 
 function Home (props){
-    
+    //console.log({homeProps: props})
     const [pageState, setPageState] = useState('loading');
     const [result, setResult] = useState("");
     const [generoSearch, setGeneroSearch] = useState("");
     const [alfSearch, setAlfSearch] = useState("");
     const [paginationOffset, setPaginationOffset] = useState(0);
     const [historialPag, setHistorialPag] = useState({prev:1, actual:1, historico:[1]});
+    const [showAddGame, setShowAddGame] = useState(false)
     
 
     useEffect(() => { 
@@ -23,6 +25,18 @@ function Home (props){
     useEffect(() => {
             setPageState('loaded')
         })       
+    
+    useEffect(() => {
+        if(showAddGame === true){
+            var modal = document.getElementById("myModalForm");
+            var span = document.getElementsByClassName("close")[0];
+            modal.style.display = "block";
+            span.onclick = function() {
+            modal.style.display = "none";
+            setShowAddGame(false)
+                    }
+        }
+    })    
 
     function handleChange(event) {
         event.preventDefault();
@@ -68,6 +82,10 @@ function Home (props){
             setPageState('loading')
             props.getVideosSearch(result)
             
+        }
+
+        function handleShowAddGame(){
+            setShowAddGame(true);
         }
 
         /////////////ORDER BY
@@ -175,19 +193,17 @@ function Home (props){
         let countDb = 0;
         let countSearch = props.videoGamesSearch.length;
 
-        
-
-               
     if(pageState === 'loading'){
         return (
             <div>{<Loading /> }</div>
         )
-    }else{
-
+    }
+    else{
    
     return(
         <div id='homeContainer'>
-            <h1 className="title">HOME</h1>  
+           
+            <h1 className="pageTitle">HOME</h1>  
             
                 <div id="searchBar">
                 <input
@@ -211,7 +227,9 @@ function Home (props){
                     handleClickSearch();
                     setGeneroSearch('seleccionar')
                     setAlfSearch('seleccionar')
-                    }}/>
+                    }}
+                    />
+                    
                 </div>
                 
 
@@ -248,6 +266,9 @@ function Home (props){
                 <option value='rat_asc'>Rating (lowest first)</option>
                 
             </select>
+
+            <a className='btnAddGame' onClick={() => handleShowAddGame()}> + ADD GAME </a>
+
             <div id='games-container'>
           
             {
@@ -317,7 +338,18 @@ function Home (props){
             {countApi !== 0 ? hacerBotones(countApi) : ''}
             {countDb !== 0 ? hacerBotones(countDb) : ''}
             {(botones.length>0) ? <span>Page/s of results: {botones}</span>  : '' }
+
+            <div id="myModalForm" className="modal">
+        
+          <div className="modal-content">
+            <span className="close">&times;</span>
+            {/* <p>Form Add Game</p> */}
+            <AddGameModal setShowAddGame={setShowAddGame} />
+          </div>
+          </div>
+
         </div>
+        
     )
 }
 }
@@ -327,6 +359,7 @@ const mapStateToProps = state => ({
     videoGameDetails: state.videoGameDetails,
     genres: state.genres,
     videoGamesSearch: state.videoGamesSearch,
+    gameAdded: state.gameAdded
 })
 
 
