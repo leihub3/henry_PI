@@ -35,8 +35,6 @@ function renderWithRedux(
     
     it('contains all the required fields', () => {
       renderWithRedux(<AddGameMenu />)
-      expect(screen.getByRole('heading', { name: 'ADD GAME' })).toBeInTheDocument()
-      expect(screen.getByRole('button', { name: 'SUBMIT' })).toBeInTheDocument()
       expect(screen.getByText(/game name/i)).toBeInTheDocument()
       expect(screen.getByText(/description/i)).toBeInTheDocument()
       expect(screen.getByText(/platforms/i)).toBeInTheDocument()

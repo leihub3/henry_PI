@@ -26,10 +26,20 @@ function AddGame(props){
     
 /************************* comienzo FUNCIONES PARA MANEJAR EVENTOS Y SETEAR LOS ESTADOS ****************/    
     function handleChangeNombre(event) {
+        if(event.target.value === ''){
+            document.getElementById('requiredName').style.display = 'inline';
+        }else{
+            document.getElementById('requiredName').style.display = 'none';
+        }
         setForm({...form,nombre: event.target.value});
     }
     
     function handleChangeDescription(event) {
+        if(event.target.value === ''){
+            document.getElementById('requiredDescription').style.display = 'inline';
+        }else{
+            document.getElementById('requiredDescription').style.display = 'none';
+        }
         setForm({...form,description: event.target.value});
     }  
 
@@ -41,7 +51,7 @@ function AddGame(props){
         setForm({...form, rating: event.target.value});
     }
 
-    function handleChangeGeneros(event){;
+    function handleChangeGeneros(event){
         let generos = form.generos
         if(JSON.stringify(generos).includes(event.target.value) === false){
             setForm({...form, generos: [...generos,{genero: event.target.value}]});
@@ -50,7 +60,7 @@ function AddGame(props){
         }        
     }
 
-    function handleChangePlatforms(event){;
+    function handleChangePlatforms(event){        
         let plataformas = form.platforms
         if(JSON.stringify(plataformas).includes(event.target.value) === false){
             setForm({...form, platforms: [...plataformas,{platform: event.target.value}]});
@@ -60,6 +70,12 @@ function AddGame(props){
     }
 
     function handleChangeImageUrl(event){
+        let r = /^(ftp|http|https):\/\/[^ "]+$/;
+        if(event.target.value === '' || (r.test(event.target.value) === false)){
+            document.getElementById('requiredUrl').style.display = 'inline';
+        }else{
+            document.getElementById('requiredUrl').style.display = 'none';
+        }
         setForm({...form, image_url: event.target.value});
     }
 
@@ -67,6 +83,11 @@ function AddGame(props){
         const previousState = nombresGeneros;
         if(previousState.includes(nombre) === true){
            setNombresGeneros(previousState.filter(g => g !== nombre))
+           if(nombresGeneros.length < 2){
+            document.getElementById('requiredGeneros').style.display = 'inline';
+           }else{
+            document.getElementById('requiredGeneros').style.display = 'none';
+           }
         }else{
             setNombresGeneros([...previousState, nombre])
         }
@@ -76,6 +97,11 @@ function AddGame(props){
         const previousState = nombresPlataformas;
         if(previousState.includes(nombre) === true){
            setNombresPlataformas(previousState.filter(g => g !== nombre))
+           if(nombresPlataformas.length < 2){
+            document.getElementById('requiredPlatforms').style.display = 'inline';
+           }else{
+            document.getElementById('requiredPlatforms').style.display = 'none';
+           }
         }else{
             setNombresPlataformas([...previousState, nombre])
         }
@@ -106,7 +132,7 @@ function AddGame(props){
       
        if(name === ''){
             document.getElementById('formName').classList.add('infoRequired')
-            // document.getElementById('requiredName').style.display = 'inline'
+            document.getElementById('requiredName').style.display = 'inline'
         }else if(description === ''){
             document.getElementById('formDescription').classList.add('infoRequired')
             // document.getElementById('requiredDescription').style.display = 'inline'
@@ -227,7 +253,8 @@ if(pageState === 'loading'){
                         <div className="divsFlex">
                             <div>
                                 <label key={1} className="subtitle" title="Required">Game name*:               
-                                <input data-testid='formNombre' type="text" name="nombre" id="formName" value={form.nombre} className="" placeholder="Enter the game name" onChange={(e) => {handleChangeNombre(e)}} onFocus={() => nameReset()}/></label> <br/>
+                                <input autoComplete='off' data-testid='formNombre' type="text" name="nombre" id="formName" value={form.nombre} className="" placeholder="Enter the game name" onChange={(e) => {handleChangeNombre(e)}} onFocus={() => nameReset()}/></label> <br/>
+                                <span id='requiredName' style={{display:'none', color:'red'}}>Please includes a name for the game.</span>
                             </div>               
                             <div>
                                 <label key={2} className="subtitle">Date of Release:</label>
@@ -241,16 +268,18 @@ if(pageState === 'loading'){
                             </div>
                             <div>
                                 <label key={4} className="subtitle">Image Url*:</label>
-                                <input className='form-control' type="text" name="image_url" id="formUrl" value={form.image_url} className="" placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/><span id='requiredUrl' style={{display:'none', color:'red'}}> Campo requerido</span>
+                                <input className='form-control' type="text" name="image_url" id="formUrl" value={form.image_url} className="" placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/>
+                                <span id='requiredUrl' style={{display:'none', color:'red'}}>Please add a proper url for the image.</span>
                             <br/>
                             </div>
                         </div>
                                 <label key={5} className="subtitle" title="Required">Description*:</label>
-                                <textarea name='description' id='formDescription' value={form.description} className='form-control' rows='1' cols='40' placeholder="Enter a game description" onChange={(e) => {handleChangeDescription(e)}} onFocus={() => descriptionReset()}></textarea><span id='requiredDescription' style={{display:'none', color:'red'}}> Campo requerido</span>
+                                <textarea name='description' id='formDescription' value={form.description} className='form-control' rows='1' cols='40' placeholder="Enter a game description" onChange={(e) => {handleChangeDescription(e)}} onFocus={() => descriptionReset()}></textarea>
+                                <span id='requiredDescription' style={{display:'none', color:'red'}}> Please add a description for the game.</span>
 
                         <div className="divsFlex">
                             <div>
-                                <label key={6} className="subtitle">Genres:</label> <span id='requiredGeneros' style={{display:'none', color:'red'}}> Campo requerido</span><br/><div className="selectBox" id='selectBox' onClick={() => displayGeneros()}>                    
+                                <label key={6} className="subtitle">Genres:</label> <br/><div className="selectBox" id='selectBox' onClick={() => displayGeneros()}>                    
                                 <a style={{width:'95%', textAlign:'left'}}>Select one or more genre</a>
                                     <span id='genresSpan' className="triangleUp"></span>
                             </div>
@@ -259,10 +288,12 @@ if(pageState === 'loading'){
                                 <label key={g.id}>{g.nombre}<input type="checkbox" name="generos" value={g.id} onChange={(e) => {handleChangeGeneros(e); genresReset(); handleNombresGeneros(g.nombre)}} /></label> //displayNombresGeneros(g.nombre)
                             ))}
                             </div>
+                            <span id='requiredGeneros' style={{display:'none', color:'red'}}> Please select one or more genres.</span>
                         </div>  
                     
                         <div>
-                                <label key={8} className="subtitle" title="Required">Platforms*:</label><span id='requiredPlatforms' style={{display:'none', color:'red'}}> Campo requerido</span><br/>
+                                <label key={8} className="subtitle" title="Required">Platforms*:</label>
+                                <br/>
                 
                         <div className="selectBoxPlataformas" id='selectBoxPlataformas' onClick={() => displayPlataformas()}>                    
                                 <a style={{width:'95%', textAlign:'left'}}>Select one or more platform</a>
@@ -272,7 +303,8 @@ if(pageState === 'loading'){
                             {props.platforms.sort(SortArrayAlfAsc).map(g => (
                                 <label key={g.nombre} >{g.nombre}<input  type="checkbox" id="formPlatforms" name="plataformas" value={g.nombre} onChange={(e) => {handleChangePlatforms(e); platformsReset(); handleNombresPlataformas(g.nombre)}} /></label>
                             ))}
-                        </div>                        
+                        </div>     
+                        <span id='requiredPlatforms' style={{display:'none', color:'red', position:'relative', left:'25px'}}> Please select one or more platforms.</span>                   
                     </div>
                 </div>    
 

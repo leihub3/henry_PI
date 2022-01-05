@@ -85,7 +85,7 @@ label{
   width: 95%;
   /* box-sizing: border-box; */
   padding: 12px 20px;
-  margin-left: 45px;
+  margin-left: 52px;
   background-color: var(--main-bg-color);
   border: 0px !important;
   border-radius: 4px !important;
@@ -128,7 +128,6 @@ label{
   padding: 2px 10px 10px 10px;
   border: 1px dashed var(--main-bg-color);
   background-color: var(--third-bg-color);
-  transition: all 2s ease !important;
   color: black;
 }
 
@@ -230,13 +229,18 @@ label{
   font-size: small;
 }
 
+.labelDescription{
+  position: relative;
+  left:-10%;
+}
+
 #addGameContainer textarea{
   position: relative;
   height: auto;
   transition: all 0.99 ease;
   overflow: hidden;
   margin-bottom: 0px !important; 
-  width: 83%;
+  width: 82%;
   box-sizing: border-box;
   padding: 12px 20px;
   /* margin: 8px 0; */
