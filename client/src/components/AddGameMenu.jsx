@@ -261,11 +261,11 @@ if(pageState === 'loading'){
                                 <input type='date' name='lanzamiento' value={form.released} className='' onChange={(e) => handleChangeReleased(e)} />
                             </div>
                         </div>
-                        <div className="divsFlex">
-                            <div>
-                                <label key={3} className="subtitle">Rating (between 0 and 5):</label>
+                        <div className="">
+                        <label key={3} className="subtitle">Rating (between 0 and 5):</label><br></br>
+                                <div id='divRange'>
                                 <input type="range" className="slider" id="rating" name="rating" value={form.rating} min="0" max="5" onChange={(e) => handleChangeRating(e)}/><span id="ratingValue"></span><br/>
-                            </div>
+                                </div>
                             <div>
                                 <label key={4} className="subtitle">Image Url*:</label>
                                 <input className='form-control' type="text" name="image_url" id="formUrl" value={form.image_url} className="" placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/>
@@ -304,7 +304,7 @@ if(pageState === 'loading'){
                                 <label key={g.nombre} >{g.nombre}<input  type="checkbox" id="formPlatforms" name="plataformas" value={g.nombre} onChange={(e) => {handleChangePlatforms(e); platformsReset(); handleNombresPlataformas(g.nombre)}} /></label>
                             ))}
                         </div>     
-                        <span id='requiredPlatforms' style={{display:'none', color:'red', position:'relative', left:'25px'}}> Please select one or more platforms.</span>                   
+                        <span id='requiredPlatforms' style={{display:'none', color:'red', position:'absolute', left:'400px'}}> Please select one or more platforms.</span>                   
                     </div>
                 </div>    
 

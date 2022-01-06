@@ -1,7 +1,5 @@
 @media only screen and (max-width: 600px) {
- .topnav-left :nth-child(2) {
-  display: none;
- }
+ 
  
  .topnav-left :nth-child(1) {
   position:absolute;
@@ -9,7 +7,17 @@
   padding-left: 0px !important;
   font-weight: bold;
   z-index: 999999999999;
-  width: 100% !important;
+  width: 50% !important;
+  left: 0px;
+ }
+
+ .topnav-left :nth-child(2) {
+  position:absolute;
+  top:60px !important;
+  margin-left: 50%;
+  font-weight: bold;
+  z-index: 999999999999;
+  width: 43% !important;
   left: 0px;
  }
 

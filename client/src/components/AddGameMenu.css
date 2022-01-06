@@ -1,11 +1,92 @@
 @media only screen and (max-width: 600px) {
-  /* For mobile phones: */
-  
+  /* For mobile phones: */  
 
-  #addGamePlataformas{
-    grid-template-columns: 50% 50%;
-    padding: 10px 70px 10px 25px;
-  }
+.divsFlex{
+  display: block !important;
+}
+
+#addGameMenuContainer{
+  padding-top: 120px;
+}
+
+.pageTitle{
+  width: 90% !important;
+  margin-left: -135px !important;
+}
+
+#addGameMenuContainer input[type=text], #addGameMenuContainer textarea, #addGameMenuContainer input[type=date], #addGameMenuContainer input[type=button], .addGameSelect{
+  width: 157% !important;
+  margin-left: -90px;  
+}
+
+#addGameMenuContainer input[type=range]{
+  display: inline;
+  width: 100% !important;
+  margin-left: -90px;
+}
+
+#requiredPlatforms{
+  left: 50px !important;
+}
+
+#divRange{
+  display: flex;
+  width: 150%;
+}
+
+#divRange label{
+  margin-bottom: 30px;
+}
+
+#formUrl{
+  position: relative;
+  left: -100px !important;
+}
+
+#addGameMenuContainer textarea{
+  margin-left: -90px;
+  width: 155% !important;
+}
+
+#selectBox{
+  margin-left: -90px !important;
+  width: 140% !important;
+}
+
+#selectBoxPlataformas{
+  margin-left: -90px !important;
+  width: 140% !important;
+}
+
+#addGameMenuContainer button{
+    width: 155% !important;
+    margin-left: -90px !important;
+}
+
+#addGameGenerosDiv{
+  width: 108% !important;
+  position: absolute;
+  margin-left: -95px;
+  top: 155px !important;
+}
+
+#addGamePlataformas{
+  width: 108% !important;
+  margin-left: -430px;
+  margin-bottom: 50px;
+}
+
+#divMostrarGeneros{
+  margin-left: -90px;
+  width: 130% !important;
+  height: 100px !important;
+}
+
+#divMostrarPlataformas{
+  margin-left: -30px;
+  width: 130% !important;
+  height: 100px !important;
+}
   
 }
 
@@ -104,6 +185,7 @@ label{
   display: none;
   grid-template-columns: 100%;
   position: absolute !important;
+  top:80px;
   left: 60px;
   bottom: 206px;
   height: 250px;
@@ -115,7 +197,6 @@ label{
   padding: 10px 10px 10px -10px;
   border: 1px dashed var(--main-bg-color);
   background-color: var(--third-bg-color);
-  transition: all 2s ease !important;
   color: black;
 }
 
@@ -181,6 +262,11 @@ label{
   transform: translateY(4px);
 }
 
+#divRange{
+  /* display: inline !important;
+  width: 100% !important; */
+}
+
 #formName{
     background-color: var(--main-bg-color);
     height: 49px !important;
@@ -203,15 +289,15 @@ label{
   }
 
   input[type=date]{
-    width: 105% !important;   
+    width: 102% !important;   
     background-color: var(--main-bg-color);
     vertical-align: text-top;
     margin-left: 12px
   }
 
   #formUrl{
-   width: 116% !important;
-   margin-left: -7px !important;
+   width: 98% !important;
+   margin-left: 10px !important;
    background-color: var(--main-bg-color);
 }
 
@@ -239,7 +325,7 @@ label{
   transition: all 0.99 ease;
   overflow: hidden;
   margin-bottom: 0px !important;
-  width: 98% !important;
+  width: 98%;
 }
 
 #addGameMenuContainer textarea:focus{
@@ -258,14 +344,14 @@ label{
   .slider {
     padding: 0px !important;
     -webkit-appearance: none;
-    width: 85% !important;
+    width: 93% !important;
     height: 25px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-    margin: 4px 10px 20px -3px;
+    margin: 4px 10px 20px 10px;
     vertical-align: text-top;
   }
 

@@ -1,18 +1,33 @@
 @media only screen and (max-width: 600px) {
   /* For mobile phones: */
   #searchBar{
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
     padding-top: 40px;
+    margin-left: 5%;
   } 
  
   #searchBar input[type=text]{
     width: 65vw;
   }
+
   #searchBar input[type=button]{ 
     margin-bottom: -23px !important;
+    /* height: 39px !important; */
   }
+  
+  #divSelects{
+    display:flex;
+    margin-left: 5%;
+    
+  }
+
   select{
-    width: 84vw !important;
+    width: 40vw !important;
   }
+
+  
+
   .btnAddGame{
     width: 80vw !important;
     margin-top: -10px;
@@ -24,16 +39,20 @@
 }
 }
 
-@media only screen and (max-width: 768px) { 
+ @media only screen and (max-width: 768px) { 
   /*Tablets*/
   #searchBar input[type=button]{ 
-    margin-bottom: -23px;
+    margin-bottom: -21px;
+  }
+  .btnAddGame{
+    margin-top: -15px;
+    margin-bottom: 25px;
   }
   #games-container{
     grid-template-columns: 100%;
     margin-left: 10%;   
 }
-}
+} 
 
 
 @media only screen and (min-width: 768px) {
@@ -44,6 +63,10 @@
 }
 #searchBar input[type=button]{ 
   margin-bottom: -21px;
+}
+
+#divSelects{
+  display:inline;
 }
 
 }

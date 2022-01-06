@@ -218,7 +218,6 @@ function Home (props){
         return(
             <div id='homeContainer'>
                 <h1 className="pageTitle">HOME</h1>  
-                {console.log(window.innerWidth)}
                     <div id="searchBar">
                         <input
                             type="text"
@@ -245,7 +244,8 @@ function Home (props){
                         />
                         
                     </div>
-                
+
+                    <div id='divSelects'>              
 
                     <select 
                         onChange={(e) => {
@@ -283,6 +283,8 @@ function Home (props){
                             <option value='rat_asc'>Rating (lowest first)</option>
                         
                     </select>
+
+                    </div>
 
                     <div className='btnAddGame' onClick={() => handleShowAddGame()}> + ADD GAME </div>
                 <div id='games-container'>
