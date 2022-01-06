@@ -1,5 +1,9 @@
 @media only screen and (max-width: 600px) {
   /* For mobile phones: */
+  .div_no_results{
+    left: -15% !important; 
+  }
+  
   #searchBar{
     display: grid !important;
     grid-template-columns: repeat(12, 1fr) !important;

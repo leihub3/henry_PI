@@ -9,7 +9,7 @@
   padding-top: 120px;
 }
 
-.pageTitle{
+#addGameMenuContainer .pageTitle{
   width: 90% !important;
   margin-left: -135px !important;
 }
