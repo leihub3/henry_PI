@@ -247,15 +247,6 @@ return (
 }else{
   return(
     <div id="addGameContainer">
-        <form method="post" enctype="multipart/form-data" action="http://localhost:3001/home/1">
- <div>
-   <label for="file">Choose file to upload</label>
-   <input type="file" id="file" name="studyPDF"/>
- </div>
- <div>
-   <button>Submit</button>
- </div>
-</form>
         <h1 className="pageTitle">ADD GAME</h1>
             <div id='divForm'>            
                 <form method="POST" name="formAddGame">

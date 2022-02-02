@@ -2,7 +2,6 @@ const { Router } = require('express');
 const { Sequelize } = require('sequelize');
 const Op = Sequelize.Op
 const axios = require('axios')
-const upload = require('../../libs/storage')
 require('dotenv').config();
 const { API_KEY} = process.env;
 
@@ -318,9 +317,6 @@ router.get('/platforms', async function(req, res){
    }
 })
 
-router.post('/home/:id', upload.single('studyPDF'), (req,res) => {
-  res.send({message: 'Study file updated successfuly!'})
-})
 
 
 module.exports = router;
