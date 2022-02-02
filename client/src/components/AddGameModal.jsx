@@ -247,6 +247,15 @@ return (
 }else{
   return(
     <div id="addGameContainer">
+        <form method="post" enctype="multipart/form-data" action="http://localhost:3001/home/1">
+ <div>
+   <label for="file">Choose file to upload</label>
+   <input type="file" id="file" name="studyPDF"/>
+ </div>
+ <div>
+   <button>Submit</button>
+ </div>
+</form>
         <h1 className="pageTitle">ADD GAME</h1>
             <div id='divForm'>            
                 <form method="POST" name="formAddGame">
@@ -268,7 +277,7 @@ return (
                         </div>
                         <div>
                             <label key={4} className="subtitle">Image Url*:</label>
-                            <input className='form-control' type="text" name="image_url" id="formUrl" value={form.image_url} className="" placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/>
+                            <input className='form-control' type="file" name="image_url" id="formUrl" value={form.image_url} className="" placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/>
                             <span id='requiredUrl' style={{display:'none', color:'red'}}>Please add a proper url for the image.</span>
                         <br/>
                         </div>
