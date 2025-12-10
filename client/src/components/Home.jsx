@@ -90,7 +90,7 @@ function Home (props){
 //Mapeo el Estado que contiene las plataformas traidas de la Api, armo los option y pongo todo en un array
 //para luego insertarlo en un select mas abajo
     const generosOptionsToList = [];    
-        props.genres.map(g => {
+        (props.genres && Array.isArray(props.genres) ? props.genres : []).map(g => {
             generosOptionsToList.push(<option key={g.id} value={g.nombre}>{g.nombre}</option>)//'<option value={g.name}>{g.name}</option>'
     })
 

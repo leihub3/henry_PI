@@ -11,11 +11,22 @@ import Home from './components/Home';
 import AddGameMenu from './components/AddGameMenu';
 import GameDetails from './components/GameDetails';
 import NotFound from './components/NotFound';
-import dotenv from 'dotenv'
 import axios from 'axios';
-dotenv.config();
 
-axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001'
+// In Create React App, process.env is automatically available
+// Only REACT_APP_ prefixed variables are exposed to the browser
+// Using a safe check in case process is not defined (e.g., browser extensions)
+const getApiUrl = () => {
+  try {
+    return (typeof process !== 'undefined' && process.env && process.env.REACT_APP_API) 
+      ? process.env.REACT_APP_API 
+      : 'http://localhost:3001';
+  } catch (e) {
+    return 'http://localhost:3001';
+  }
+};
+
+axios.defaults.baseURL = getApiUrl();
 
 
 ReactDOM.render(

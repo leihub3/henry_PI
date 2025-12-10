@@ -33,10 +33,22 @@ let sequelize =
         },
         ssl: true,
       })
-    : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`,
-        { logging: false, native: false }
-      );
+    : new Sequelize({
+        database: DB_NAME || 'videogames',
+        dialect: "postgres",
+        host: DB_HOST,
+        port: 5432,
+        username: DB_USER,
+        password: DB_PASSWORD,
+        logging: false,
+        native: false,
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        },
+      });
 
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
 //   logging: false, // set to console.log to see the raw SQL queries

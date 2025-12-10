@@ -266,7 +266,8 @@ router.get('/genres', async function(req,res){
       res.json(generosFiltrados)
        }
        catch(err){
-           res.send(err)
+           console.error('Error fetching genres:', err);
+           res.status(500).json([])
        }
 })
 
