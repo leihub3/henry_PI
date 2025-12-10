@@ -17,7 +17,7 @@ function App(props) {
   dispatch(getGenresAPI())
   dispatch(getVideosDB())
   dispatch(getPlatformsAPI())
-  },[])
+  },[dispatch])
 
 
   return (

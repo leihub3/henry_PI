@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import './Games.css'
 import { useDispatch } from 'react-redux';
-import { Loading } from './Loading';
 
 
 export default function Games({getGameDetails, game}){

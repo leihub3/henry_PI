@@ -7,9 +7,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Landing from './components/Landing';
-import Home from './components/Home';
-import AddGameMenu from './components/AddGameMenu';
-import GameDetails from './components/GameDetails';
 import NotFound from './components/NotFound';
 import axios from 'axios';
 

@@ -17,11 +17,11 @@ function Home (props){
 
     useEffect(() => { 
         props.cleanGameDetails()
-       }, [])
+       }, [props.cleanGameDetails])
 
     useEffect(() => {
             setPageState('loaded')
-        })       
+        }, [])       
     
     useEffect(() => {
         if(showAddGame === true){
@@ -90,7 +90,7 @@ function Home (props){
 //Mapeo el Estado que contiene las plataformas traidas de la Api, armo los option y pongo todo en un array
 //para luego insertarlo en un select mas abajo
     const generosOptionsToList = [];    
-        (props.genres && Array.isArray(props.genres) ? props.genres : []).map(g => {
+        (props.genres && Array.isArray(props.genres) ? props.genres : []).forEach(g => {
             generosOptionsToList.push(<option key={g.id} value={g.nombre}>{g.nombre}</option>)//'<option value={g.name}>{g.name}</option>'
     })
 
@@ -303,6 +303,7 @@ function Home (props){
                                                     <Games getGameDetails={getGameDetails} game={vg} />
                                                 </div>
                                     }
+                                    return null;
                             }
                                     countSearch = 0;                     
                         //FILTRO POR ORIGEN: API                
@@ -314,7 +315,9 @@ function Home (props){
                                                     <Games getGameDetails={getGameDetails} game={vg} />
                                                 </div>
                                     }
+                                    return null;
                             }
+                            return null;
                         //FILTRO POR ORIGEN: DB     
                         }else if(generoSearch === 'db'){
                             if(vg.origen === 'db'){  /*nameToLower.includes(resultToLower) && */
@@ -324,8 +327,11 @@ function Home (props){
                                                     <Games getGameDetails={getGameDetails} game={vg} />
                                             </div>
                                     }
+                                    return null;
                             }
+                            return null;
                         }
+                        return null;
                     
                         // si NO HAY FILTROS SELECCIONADOS                    
                         }else{
@@ -335,13 +341,14 @@ function Home (props){
                                         return <div key={vg.id}>
                                                     <Games getGameDetails={getGameDetails} game={vg} />
                                                 </div>
-                                    }                            
+                                    }
+                                    return null;                            
                             //}
                         }
                     }
                     /*Si el criterio de BUSQUEDA no arroja ningun resultado*/
                     else{
-                        return (<div className='div_no_results'>{vg.mensaje}</div>)
+                        return (<div key={vg.id} className='div_no_results'>{vg.mensaje}</div>)
                     }
                     
                 })

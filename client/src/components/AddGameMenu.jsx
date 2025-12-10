@@ -16,7 +16,7 @@ function AddGame(props){
 
     useEffect(() => {
         setPageState('loaded')
-    }) 
+    }, []) 
 
     let formInitialState = {nombre:'', description:'', released:'', rating:5, generos:[], platforms:[], image_url:''}
     const [form, setForm] = useState(formInitialState);
@@ -268,7 +268,7 @@ if(pageState === 'loading'){
                                 </div>
                             <div>
                                 <label key={4} className="subtitle">Image Url*:</label>
-                                <input className='form-control' type="text" name="image_url" id="formUrl" value={form.image_url} className="" placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/>
+                                <input className='form-control' type="text" name="image_url" id="formUrl" value={form.image_url} placeholder="Enter a valid url image" onChange={(e) => handleChangeImageUrl(e)} onFocus={() => urlReset()}/>
                                 <span id='requiredUrl' style={{display:'none', color:'red'}}>Please add a proper url for the image.</span>
                             <br/>
                             </div>
@@ -279,8 +279,8 @@ if(pageState === 'loading'){
 
                         <div className="divsFlex">
                             <div>
-                                <label key={6} className="subtitle">Genres:</label> <br/><div className="selectBox" id='selectBox' onClick={() => displayGeneros()}>                    
-                                <a style={{width:'95%', textAlign:'left'}}>Select one or more genre</a>
+                                <label key={6} className="subtitle">Genres:</label> <br/>                                <div className="selectBox" id='selectBox' onClick={() => displayGeneros()}>                    
+                                <button type="button" style={{width:'95%', textAlign:'left', background:'none', border:'none', cursor:'pointer', padding:0}}>Select one or more genre</button>
                                     <span id='genresSpan' className="triangleUp"></span>
                             </div>
                             <div id="addGameGenerosDiv" onMouseOut={() => displayGeneros()} >                   
@@ -296,7 +296,7 @@ if(pageState === 'loading'){
                                 <br/>
                 
                         <div className="selectBoxPlataformas" id='selectBoxPlataformas' onClick={() => displayPlataformas()}>                    
-                                <a style={{width:'95%', textAlign:'left'}}>Select one or more platform</a>
+                                <button type="button" style={{width:'95%', textAlign:'left', background:'none', border:'none', cursor:'pointer', padding:0}}>Select one or more platform</button>
                                     <span id='platformsSpan' className="triangleUp"></span>
                         </div>
                         <div id="addGamePlataformas" onMouseOut={() => displayPlataformas()} style={{display:'none'}}>

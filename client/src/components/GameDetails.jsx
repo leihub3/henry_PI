@@ -1,17 +1,16 @@
 import { connect } from 'react-redux';
 import './GameDetails.css';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Loading } from './Loading';
 
 
 
 function GameDetails(props){
     let game = props.videoGameDetails[0];    
-    const [estado, setEstado] = useState('loading');
 
     useEffect(() => {
-        setEstado('loaded') 
-        })
+        // Component loaded
+        }, [])
 
         if(!game){
             return (
@@ -35,13 +34,12 @@ function GameDetails(props){
 
             let plataformas ='';
             if(game.origen === 'api'){
-                game.platforms.map((p,i) => {
+                game.platforms.forEach((p,i) => {
                     if(i !== game.platforms.length-1){
                         plataformas += (p.platform.name + '; ')
                     }else{
                         plataformas += (p.platform.name + '.')
                     }
-                    return
                 })
             }else{
                 plataformas = game.platforms;
@@ -52,7 +50,7 @@ function GameDetails(props){
 
             let web;
             if(game.website !== ''){
-                web = <div className="txtDetailColor flexDiv2"><b>Website: </b><br></br><a href={game.website} target='_blank' >click here</a></div>
+                web = <div className="txtDetailColor flexDiv2"><b>Website: </b><br></br><a href={game.website} target='_blank' rel="noreferrer" >click here</a></div>
             }else{
                 web = '';
             }

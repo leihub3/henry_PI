@@ -5,15 +5,10 @@ import './Navbar.css'
 
 export default function Navbar(){
   const [menu, setMenu] = useState({active:'home'});
-  const [showMobile, setShowMobile] = useState(false);
 
   function handleClickMenu(e,value){
     //e.preventDefault();
     setMenu({active: value})
-  }
-
-  function showMobileMenu(){
-    setShowMobile(true)    
   }
 
   let claseHome;
