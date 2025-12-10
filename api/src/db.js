@@ -9,6 +9,14 @@ const {
 } = process.env;
 
 
+// Determine if SSL is required based on host (cloud databases like Neon require SSL)
+const isCloudDatabase = DB_HOST && (
+  DB_HOST.includes('neon') || 
+  DB_HOST.includes('amazonaws') || 
+  DB_HOST.includes('azure') ||
+  DB_HOST.includes('cloud')
+);
+
 let sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
@@ -42,12 +50,15 @@ let sequelize =
         password: DB_PASSWORD,
         logging: false,
         native: false,
-        dialectOptions: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false,
+        // Only use SSL for cloud databases (like Neon), not for local development
+        ...(isCloudDatabase && {
+          dialectOptions: {
+            ssl: {
+              require: true,
+              rejectUnauthorized: false,
+            },
           },
-        },
+        }),
       });
 
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
